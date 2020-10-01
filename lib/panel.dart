@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(MyApp());
@@ -13,87 +15,240 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: title,
       theme: ThemeData(
-        primarySwatch: Colors.deepPurple,
+        primarySwatch: Colors.blue,
         //  accentColor: Colors.orangeAccent,
       ),
       home: Scaffold(
-          appBar: AppBar(
-
-            title: Text(title),
-          ),
-          body: GridView.count(
-            primary: false,
-            padding: const EdgeInsets.all(20),
-            crossAxisSpacing: 10,
-            mainAxisSpacing: 10,
-            crossAxisCount: 2,
-            children: <Widget>[
-              Container(
-                padding: const EdgeInsets.all(8),
-                child: RaisedButton(
-                  color: Colors.deepPurple,
-                  child: Text("Müşteriler",
-                    style: TextStyle(
-                        color: Colors.white
-                    ),
+        appBar: AppBar(
+          actions: <Widget> [
+            Padding(
+                padding: EdgeInsets.only(right: 20.0),
+                child: GestureDetector(
+                  onTap: () {},
+                  child: Icon(
+                    Icons.search,
+                    size: 26.0,
                   ),
-                  onPressed: (){},
-                ),
-              ),
-              Container(
-
-                padding: const EdgeInsets.all(8),
-                child: RaisedButton(
-                  color: Colors.deepPurple,
-                  child: Text("Yapılacak İşlemler",
-                    style: TextStyle(
-                        color: Colors.white
-                    ),
+                )
+            ),
+            Padding(
+                padding: EdgeInsets.only(right: 20.0),
+                child: GestureDetector(
+                  onTap: () {},
+                  child: Icon(
+                      Icons.more_vert
                   ),
-                  onPressed: (){},
-                ),
-              ),
-              Container(
+                )
+            ),
+          ],
+          title: Text(title),
+        ),
+        body: Container(
+            color: Color(0x6ec6ff),
+            child: GridView.count(
+              primary: false,
+              padding: const EdgeInsets.only(top: 100, left: 20, right: 20, bottom: 20),
+              crossAxisSpacing: 30,
+              mainAxisSpacing: 30,
+              crossAxisCount: 2,
 
-                padding: const EdgeInsets.all(8),
-                child: RaisedButton(
-                  color: Colors.deepPurple,
-                  child: Text("Tamamlanan İşlemler",
-                    style: TextStyle(
-                        color: Colors.white
+              children: <Widget>[
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    /*   color: Colors.deepPurple.shade700,*/
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(35),
+                      topRight: Radius.circular(35),
+                      bottomLeft: Radius.circular(35),
+                      bottomRight: Radius.circular(35),
                     ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.shade500.withOpacity(0.5),
+                        spreadRadius: 0.5,
+                        blurRadius: 10,
+                        offset: Offset(0, 1), // changes position of shadow
+                      ),
+                    ],
                   ),
-                  onPressed: (){},
+                  child: RaisedButton(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(35.0),
+                        side: BorderSide(color: Colors.blue)
+                    ),
+                    color: Colors.blue,
+                    child: Text("Müşteriler",
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.zillaSlab(
+                        textStyle: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                    onPressed: (){},
+                  ),
                 ),
-              ),
-              Container(
+                Container(
 
-                padding: const EdgeInsets.all(8),
-                child: RaisedButton(
-                  color: Colors.deepPurple,
-                  child: Text("Süreçler",
-                    style: TextStyle(
-                        color: Colors.white
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    /*   color: Colors.deepPurple.shade700,*/
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(35),
+                      topRight: Radius.circular(35),
+                      bottomLeft: Radius.circular(35),
+                      bottomRight: Radius.circular(35),
                     ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.shade500.withOpacity(0.5),
+                        spreadRadius: 0.5,
+                        blurRadius: 10,
+                        offset: Offset(0, 1), // changes position of shadow
+                      ),
+                    ],
                   ),
-                  onPressed: (){},
+                  child: RaisedButton(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(35.0),
+                        side: BorderSide(color: Colors.blue)
+                    ),
+                    color: Colors.blue,
+                    child: Text("Yapılacak İşlemler",
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.zillaSlab(
+                        textStyle: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                    onPressed: (){},
+                  ),
                 ),
-              ),
-              Container(
+                Container(
 
-                padding: const EdgeInsets.all(8),
-                child: RaisedButton(
-                  color: Colors.deepPurple,
-                  child: Text("Yorum ve Şikayetler",
-                    style: TextStyle(
-                        color: Colors.white
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    /*   color: Colors.deepPurple.shade700,*/
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(35),
+                      topRight: Radius.circular(35),
+                      bottomLeft: Radius.circular(35),
+                      bottomRight: Radius.circular(35),
                     ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.shade500.withOpacity(0.5),
+                        spreadRadius: 0.5,
+                        blurRadius: 10,
+                        offset: Offset(0, 1), // changes position of shadow
+                      ),
+                    ],
                   ),
-                  onPressed: (){},
+                  child: RaisedButton(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(35.0),
+                        side: BorderSide(color: Colors.blue)
+                    ),
+                    color: Colors.blue,
+                    child: Text("Tamamlanan İşlemler",
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.zillaSlab(
+                        textStyle: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                    onPressed: (){},
+                  ),
                 ),
-              ),
-            ],
-          )
+                Container(
+
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    /*   color: Colors.deepPurple.shade700,*/
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(35),
+                      topRight: Radius.circular(35),
+                      bottomLeft: Radius.circular(35),
+                      bottomRight: Radius.circular(35),
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.shade500.withOpacity(0.5),
+                        spreadRadius: 0.5,
+                        blurRadius: 10,
+                        offset: Offset(0, 1), // changes position of shadow
+                      ),
+                    ],
+                  ),
+                  child: RaisedButton(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(35.0),
+                        side: BorderSide(color: Colors.blue)
+                    ),
+                    color: Colors.blue,
+                    child: Text("Süreçler",
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.zillaSlab(
+                        textStyle: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                    onPressed: (){},
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    /*   color: Colors.deepPurple.shade700,*/
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(35),
+                      topRight: Radius.circular(35),
+                      bottomLeft: Radius.circular(35),
+                      bottomRight: Radius.circular(35),
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 0.5,
+                        blurRadius: 10,
+                        offset: Offset(0, 1), // changes position of shadow
+                      ),
+                    ],
+                  ),
+                  child: RaisedButton(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(35.0),
+                        side: BorderSide(color: Colors.blue)
+                    ),
+                    color: Colors.blue,
+                    child: Text("Yorum ve Şikayetler",
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.zillaSlab(
+                        textStyle: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                    onPressed: (){},
+                  ),
+                ),
+              ],
+            )
+        ),
       ),
     );
   }
