@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class MyAppOne extends StatefulWidget {
+
   @override
   _MyAppOneState createState() => _MyAppOneState();
 }
 
 class _MyAppOneState extends State<MyAppOne> {
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  Map<String, dynamic> dbEkle = Map();
+
+
   var customerNames = [
     "Sultan",
     "Esra",
@@ -105,7 +112,9 @@ class _MyAppOneState extends State<MyAppOne> {
                     child: IconButton(
                       color: Colors.white,
                       onPressed: () {
-                        lastDates[position];
+                        dbEkle["name"] = "sultan";
+                        _firestore.collection("users").doc("04jgbG1t0W0JGse0Kywm").set(dbEkle).then((v) => debugPrint(
+                            "data eklendi"));
                       },
                       icon: Icon(Icons.call),
                     ),
