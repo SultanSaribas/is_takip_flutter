@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "107886011933",
+    "firebase_url": "https://istakip-b5375.firebaseio.com",
+    "project_id": "istakip-b5375",
+    "storage_bucket": "istakip-b5375.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:107886011933:android:fca986199312dcc75f88f4",
+        "android_client_info": {
+          "package_name": "com.example.is_takip_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "107886011933-eh38l046knhmkr859rnlu18pfcgg71si.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZoMKC5DUtJfv8B01crSQh5lkde6FJBD0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "107886011933-eh38l046knhmkr859rnlu18pfcgg71si.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
