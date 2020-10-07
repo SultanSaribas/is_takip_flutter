@@ -15,20 +15,31 @@ class _LoginScreenState extends State<LoginScreen> with LoginValidationMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Giriş"),
-      ),
-      body: Padding(
-          padding: EdgeInsets.all(75.0),
+        body: Padding(
+      padding: EdgeInsets.only(top: 50.0),
+      child: Column(children: <Widget>[
+        Container(
+            margin: EdgeInsets.only(bottom: 50.0, left: 20.0, right: 20.0),
+            child: CircleAvatar(
+                maxRadius: 40.0,
+                backgroundColor: Colors.lightBlue,
+                child: Text(
+                  "ITS",
+                  style: TextStyle(color: Colors.white, fontSize: 30.0),
+                ))),
+        Container(
+          margin: EdgeInsets.all(10.0),
           child: Form(
             key: formKey,
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.max,
               children: <Widget>[
                 buildEmail(),
-                Padding(
-                  padding: EdgeInsets.only(top: 10.0),
-                ),
+                SizedBox(height: 15.0),
                 buildPassWord(),
+                SizedBox(height: 5.0),
                 buildSubmitButton(),
                 RaisedButton(
                   child: Text("Yeni Kayıt Oluştur"),
@@ -41,14 +52,23 @@ class _LoginScreenState extends State<LoginScreen> with LoginValidationMixin {
                 )
               ],
             ),
-          )),
-    );
+          ),
+        ),
+      ]),
+    ));
   }
 
   Widget buildEmail() {
     return TextFormField(
       decoration: InputDecoration(
-          labelText: "Mail Adresinizi giriniz:", hintText: "mail@gmail.com"),
+        labelText: "Mail Adresinizi giriniz:",
+        hintText: "mail@gmail.com",
+        focusedBorder:
+            OutlineInputBorder(borderSide: BorderSide(color: Colors.blueGrey)),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+        ),
+      ),
       validator: validateEmail,
       onSaved: (String v) {
         this.user.email = v;
@@ -60,6 +80,11 @@ class _LoginScreenState extends State<LoginScreen> with LoginValidationMixin {
     return TextFormField(
       decoration: InputDecoration(
         labelText: "Şifreniz:",
+        focusedBorder:
+            OutlineInputBorder(borderSide: BorderSide(color: Colors.blueGrey)),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+        ),
       ),
       validator: validatePassword,
       onSaved: (String p) {
@@ -69,13 +94,20 @@ class _LoginScreenState extends State<LoginScreen> with LoginValidationMixin {
   }
 
   buildSubmitButton() {
-    return RaisedButton(
-        child: Text("Giriş"),
+    return FlatButton(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        color: Colors.blue,
+        child: Text(
+          "      Giriş       ",
+          style: TextStyle(color: Colors.white),
+        ),
         onPressed: () {
-          /* if (formKey.currentState.validate()) {
+          if (formKey.currentState.validate()) {
             formKey.currentState.save();
             print(user.email + " " + user.password);
-          } */
+          }
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => Panel()));
         });
