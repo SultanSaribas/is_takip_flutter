@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:is_takip_flutter/screens/musteriler.dart';
+import 'package:is_takip_flutter/screens/customers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Panel extends StatefulWidget {
@@ -84,7 +84,7 @@ class _PanelState extends State {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => MyAppOne(),
+                            builder: (context) => Customers(),
                           ));
                     }),
               ),
