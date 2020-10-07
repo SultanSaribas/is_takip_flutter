@@ -16,45 +16,58 @@ class _LoginScreenState extends State<LoginScreen> with LoginValidationMixin {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Padding(
-      padding: EdgeInsets.only(top: 50.0),
-      child: Column(children: <Widget>[
-        Container(
-            margin: EdgeInsets.only(bottom: 50.0, left: 20.0, right: 20.0),
-            child: CircleAvatar(
-                maxRadius: 40.0,
-                backgroundColor: Colors.lightBlue,
-                child: Text(
-                  "ITS",
-                  style: TextStyle(color: Colors.white, fontSize: 30.0),
-                ))),
-        Container(
-          margin: EdgeInsets.all(10.0),
-          child: Form(
-            key: formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisSize: MainAxisSize.max,
-              children: <Widget>[
-                buildEmail(),
-                SizedBox(height: 15.0),
-                buildPassWord(),
-                SizedBox(height: 5.0),
-                buildSubmitButton(),
-                RaisedButton(
-                  child: Text("Yeni Kayıt Oluştur"),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => RegisterScreen()));
-                  },
-                )
-              ],
+      padding: EdgeInsets.only(top: 10.0),
+      child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Expanded(
+              child: Container(
+                  child: CircleAvatar(
+                      maxRadius: 50.0,
+                      backgroundColor: Colors.lightBlue,
+                      child: Text(
+                        "ITS",
+                        style: TextStyle(color: Colors.white, fontSize: 25.0),
+                      ))),
             ),
-          ),
-        ),
-      ]),
+            Container(
+              padding: EdgeInsets.only(bottom: 50.0, left: 20.0, right: 20.0),
+              child: Form(
+                key: formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  verticalDirection: VerticalDirection.down,
+                  children: <Widget>[
+                    buildEmail(),
+                    SizedBox(height: 15.0),
+                    buildPassWord(),
+                    SizedBox(height: 5.0),
+                    buildSubmitButton(),
+                    RaisedButton(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      color: Colors.blue,
+                      child: Text(
+                        "    Kayıt Ol    ",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => RegisterScreen()));
+                      },
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ]),
     ));
   }
 
