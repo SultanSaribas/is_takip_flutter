@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:is_takip_flutter/screens/customers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:is_takip_flutter/screens/satici_giris.dart';
 
 class Panel extends StatefulWidget {
   @override
@@ -108,23 +109,28 @@ class _PanelState extends State {
                   ],
                 ),
                 child: RaisedButton(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(35.0),
-                      side: BorderSide(color: Colors.blue)),
-                  color: Colors.blue,
-                  child: Text(
-                    "Yapılacak İşlemler",
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.zillaSlab(
-                      textStyle: TextStyle(
-                        fontSize: 20,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w500,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(35.0),
+                        side: BorderSide(color: Colors.blue)),
+                    color: Colors.blue,
+                    child: Text(
+                      "Yapılacak İşlemler",
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.zillaSlab(
+                        textStyle: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ),
-                  ),
-                  onPressed: () {},
-                ),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SaticiGiris(),
+                          ));
+                    }),
               ),
               Container(
                 padding: const EdgeInsets.all(8),

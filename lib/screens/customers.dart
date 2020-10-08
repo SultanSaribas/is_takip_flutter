@@ -5,7 +5,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:is_takip_flutter/screens/customer_profile.dart';
 
 class Customers extends StatefulWidget {
-
   @override
   _CustomersState createState() => _CustomersState();
 }
@@ -13,8 +12,6 @@ class Customers extends StatefulWidget {
 class _CustomersState extends State<Customers> {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   Map<String, dynamic> dbEkle = Map();
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -70,11 +67,9 @@ class _CustomersState extends State<Customers> {
               )),
         ],
         title: Text(title),
-       ),
-
+      ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-        },
+        onPressed: () {},
         child: Icon(
           Icons.add,
           size: 48.0,
@@ -84,10 +79,10 @@ class _CustomersState extends State<Customers> {
       body: GestureDetector(
         onTap: () {
           Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => CustomerProfile(),
-            ));
+              context,
+              MaterialPageRoute(
+                builder: (context) => CustomerProfile(),
+              ));
         },
         child: ListView.builder(
           padding: const EdgeInsets.all(12),
@@ -95,7 +90,7 @@ class _CustomersState extends State<Customers> {
             return Container(
               height: 130,
               child: Card(
-        //        color: Colors.blue,
+                //        color: Colors.blue,
                 elevation: 10,
 
                 child: Row(
@@ -104,21 +99,21 @@ class _CustomersState extends State<Customers> {
                       child: Padding(
                         padding: EdgeInsets.all(10.0),
                         child: Container(
-                              alignment: Alignment.centerLeft,
-                              padding:EdgeInsets.only(left: 15.0),
-                              child: Text(
-                                customerNames[i],
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16.0,
-                                ),
-                              ),
+                          alignment: Alignment.centerLeft,
+                          padding: EdgeInsets.only(left: 15.0),
+                          child: Text(
+                            customerNames[i],
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16.0,
+                            ),
+                          ),
 
-                           /*   shadowColor: Colors.blue,
+                          /*   shadowColor: Colors.blue,
                                 backgroundColor: Colors.transparent,
                               elevation: 5,
                               autofocus: true,*/
-                            ),
+                        ),
                       ),
                     ),
                     Expanded(
@@ -126,7 +121,7 @@ class _CustomersState extends State<Customers> {
                         padding: EdgeInsets.all(10.0),
                         child: Container(
                           alignment: Alignment.centerLeft,
-                          padding:EdgeInsets.only(right: 15.0),
+                          padding: EdgeInsets.only(right: 15.0),
                           child: Text(
                             lastDates[i],
                             style: TextStyle(
@@ -161,8 +156,11 @@ class _CustomersState extends State<Customers> {
                             color: Colors.white,
                             onPressed: () {
                               dbEkle["name"] = "sultan";
-                              _firestore.collection("users").doc().set(dbEkle).then((v) => debugPrint(
-                                  "data eklendi"));
+                              _firestore
+                                  .collection("users")
+                                  .doc()
+                                  .set(dbEkle)
+                                  .then((v) => debugPrint("data eklendi"));
                             },
                             icon: Icon(Icons.call),
                           ),
