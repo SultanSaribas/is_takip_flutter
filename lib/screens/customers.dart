@@ -100,6 +100,14 @@ class _CustomersState extends State<Customers> {
                         padding: EdgeInsets.all(10.0),
                         child: Container(
                           alignment: Alignment.centerLeft,
+                          decoration: BoxDecoration(
+                            border: Border(
+                                left: BorderSide(
+                                  color: Colors.blue,
+                                  width: 5,
+                                )
+                            ),
+                          ),
                           padding: EdgeInsets.only(left: 15.0),
                           child: Text(
                             customerNames[i],
