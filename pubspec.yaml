@@ -21,9 +21,11 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 #flutter pub get == to install Google Fonts by Terminal
 dependencies:
+  fluttericon: ^1.0.7
   google_fonts: ^1.1.0
   firebase_core: ^0.5.0
   cloud_firestore: ^0.14.1+2
+
 
   flutter:
     sdk: flutter

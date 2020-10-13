@@ -2,6 +2,8 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:fluttericon/font_awesome5_icons.dart';
+import 'package:fluttericon/font_awesome_icons.dart';
 
 class CustomerAdd extends StatefulWidget {
   @override
@@ -135,7 +137,7 @@ class _CustomerAddState extends State<CustomerAdd> {
                   title: Text("Ödeme Durumu"),
                   subtitle: Text("Ödeme Alındı/ Alınmadı"),
                   secondary: Icon(
-                    Icons.money,
+                    FontAwesome5.lira_sign,
                     color: Colors.lightBlue,
                   ),
                   value: checBoxState,
