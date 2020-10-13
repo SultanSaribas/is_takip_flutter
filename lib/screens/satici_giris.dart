@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+import 'customer_add.dart';
+
 class SaticiGiris extends StatefulWidget {
   @override
   _SaticiGirisState createState() => _SaticiGirisState();
@@ -84,6 +86,9 @@ class _SaticiGirisState extends State<SaticiGiris> {
                         child: Text("İLERLE"),
                         onPressed: () {},
                         color: Colors.blue.shade100,
+                        shape: new RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(30.0),
+                        ),
                       ),
                     ]),
                   ]),
@@ -97,7 +102,7 @@ class _SaticiGirisState extends State<SaticiGiris> {
                   "Detay",
                   style: TextStyle(color: Colors.teal),
                 ),
-                backgroundColor: Colors.yellow.shade100,
+                backgroundColor: Colors.yellow.shade50,
                 //tilePadding: EdgeInsets.all(10),
                 children: <Widget>[
                   Row(
@@ -120,7 +125,10 @@ class _SaticiGirisState extends State<SaticiGiris> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => CustomerAdd()));
+        },
         child: Icon(Icons.add),
       ),
     );
