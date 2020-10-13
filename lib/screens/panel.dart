@@ -167,7 +167,13 @@ class _PanelState extends State {
                       ),
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => SaticiGiris(),
+                        ));
+                  },
                 ),
               ),
               Container(
