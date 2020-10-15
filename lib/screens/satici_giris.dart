@@ -13,7 +13,8 @@ class SaticiGiris extends StatefulWidget {
 class _SaticiGirisState extends State<SaticiGiris> {
   //bool isSwitched = false;
   var customerID = "12";
-  List<bool> payment = [true, false, true, true, true, false];
+  int i = 0;
+  List<bool> payment = [false, false, false, false, false, false];
   var customerNames = [
     "Sultan",
     "Esra",
@@ -90,6 +91,16 @@ class _SaticiGirisState extends State<SaticiGiris> {
                           borderRadius: new BorderRadius.circular(30.0),
                         ),
                       ),
+                      RaisedButton(
+                        child: Text("dene"),
+                        onPressed: () {
+                          _yazdir();
+                        },
+                        color: Colors.blue.shade100,
+                        shape: new RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(30.0),
+                        ),
+                      ),
                     ]),
                   ]),
             ),
@@ -132,5 +143,11 @@ class _SaticiGirisState extends State<SaticiGiris> {
         child: Icon(Icons.add),
       ),
     );
+  }
+
+  void _yazdir() {
+    for (i = 0; i <= payment.length - 1; i++) {
+      debugPrint(payment[i].toString());
+    }
   }
 }

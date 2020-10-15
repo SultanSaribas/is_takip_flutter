@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:is_takip_flutter/screens/customers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:is_takip_flutter/screens/satici_giris.dart';
+import 'package:is_takip_flutter/screens/kayitli_surec.dart';
 
 class Panel extends StatefulWidget {
   @override
@@ -211,7 +212,10 @@ class _PanelState extends State {
                       ),
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Surec()));
+                  },
                 ),
               ),
               Container(
