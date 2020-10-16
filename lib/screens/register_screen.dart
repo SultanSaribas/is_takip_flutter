@@ -96,7 +96,7 @@ class RegisterScreenState extends State<RegisterScreen>
         ),
       ),
       validator: validateEmail,
-      onFieldSubmitted: (String gM) {
+      onChanged: (String gM) {
         gelenMail = gM;
       },
     );
@@ -114,7 +114,7 @@ class RegisterScreenState extends State<RegisterScreen>
         ),
       ),
       validator: validatePassword,
-      onFieldSubmitted: (String gS) {
+      onChanged: (String gS) {
         gelenSifre = gS;
       },
     );
@@ -131,7 +131,7 @@ class RegisterScreenState extends State<RegisterScreen>
           borderRadius: BorderRadius.all(Radius.circular(10.0)),
         ),
       ),
-      onFieldSubmitted: (String gK) {
+      onChanged: (String gK) {
         gelenSifreKontrol = gK;
       },
     );
