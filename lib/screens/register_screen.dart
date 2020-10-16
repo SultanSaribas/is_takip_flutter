@@ -3,6 +3,8 @@ import 'package:flutter/widgets.dart';
 import 'package:is_takip_flutter/screens/login_screen.dart';
 import 'package:is_takip_flutter/models/users.dart';
 import 'package:is_takip_flutter/validation/login_validation.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -16,6 +18,10 @@ class RegisterScreenState extends State<RegisterScreen>
     with LoginValidationMixin {
   Users user = Users.empyty();
   var formKey = GlobalKey<FormState>();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  String gelenMail;
+  String gelenSifre;
+  String gelenSifreKontrol;
 
   @override
   Widget build(BuildContext context) {
@@ -34,13 +40,13 @@ class RegisterScreenState extends State<RegisterScreen>
                           backgroundColor: Colors.lightBlue,
                           child: Text(
                             "ITS",
-                            style:
-                                TextStyle(color: Colors.white, fontSize: 25.0),
+                            style: TextStyle(
+                                color: Colors.white, fontSize: 25.0),
                           ))),
                 ),
                 Container(
-                  padding:
-                      EdgeInsets.only(bottom: 50.0, left: 20.0, right: 20.0),
+                  padding: EdgeInsets.only(
+                      bottom: 50.0, left: 20.0, right: 20.0),
                   child: Form(
                     key: formKey,
                     child: Column(
@@ -62,14 +68,12 @@ class RegisterScreenState extends State<RegisterScreen>
                           ),
                           color: Colors.blue,
                           child: Text(
-                            "    Giriş Yap    ",
+                            "     kontrol et    ",
                             style: TextStyle(color: Colors.white),
                           ),
                           onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => LoginScreen()));
+                            debugPrint(gelenSifre);
+                            debugPrint(gelenMail);
                           },
                         )
                       ],
@@ -86,41 +90,23 @@ class RegisterScreenState extends State<RegisterScreen>
         labelText: "Mail Adresinizi giriniz: ",
         hintText: "mail@gmail.com",
         focusedBorder:
-            OutlineInputBorder(borderSide: BorderSide(color: Colors.blueGrey)),
+        OutlineInputBorder(borderSide: BorderSide(color: Colors.blueGrey)),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(10.0)),
         ),
       ),
       validator: validateEmail,
-      onSaved: (String v) {
-        this.user.email = v;
+      onFieldSubmitted: (String gM) {
+        gelenMail = gM;
       },
     );
   }
 
   Widget createPassWord() {
     return TextFormField(
+      obscureText: true,
       decoration: InputDecoration(
         labelText: "Şifre Oluşturun: ",
-        hintText: "*********",
-        focusedBorder:
-            OutlineInputBorder(borderSide: BorderSide(color: Colors.blueGrey)),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-        ),
-      ),
-      validator: validatePassword,
-      onSaved: (String p) {
-        this.user.password = p;
-      },
-    );
-  }
-
-  Widget confirmPassWord() {
-    return TextFormField(
-      decoration: InputDecoration(
-        labelText: "Şifrenizi Doğrulayın: ",
-        hintText: "*********",
         focusedBorder:
         OutlineInputBorder(borderSide: BorderSide(color: Colors.blueGrey)),
         border: OutlineInputBorder(
@@ -128,8 +114,25 @@ class RegisterScreenState extends State<RegisterScreen>
         ),
       ),
       validator: validatePassword,
-      onSaved: (String p) {
-        this.user.password = p;
+      onFieldSubmitted: (String gS) {
+        gelenSifre = gS;
+      },
+    );
+  }
+
+  Widget confirmPassWord() {
+    return TextFormField(
+      obscureText: true,
+      decoration: InputDecoration(
+        labelText: "Şifrenizi Doğrulayın: ",
+        focusedBorder:
+        OutlineInputBorder(borderSide: BorderSide(color: Colors.blueGrey)),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+        ),
+      ),
+      onFieldSubmitted: (String gK) {
+        gelenSifreKontrol = gK;
       },
     );
   }
@@ -145,12 +148,19 @@ class RegisterScreenState extends State<RegisterScreen>
           style: TextStyle(color: Colors.white),
         ),
         onPressed: () {
-          if (formKey.currentState.validate()) {
-            formKey.currentState.save();
-            print(user.email + " " + user.password);
-          }
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => LoginScreen()));
+          if (gelenSifre.length>=6) {
+            if (gelenSifre == gelenSifreKontrol) {
+              _emailSifreRegister(gelenMail, gelenSifre);
+            }
+            else {
+              debugPrint("Şifreler uyuşmuyor");
+            }
+          }else{debugPrint("Şifre en az 6 karakterden oluşmalı");}
         });
+  }
+
+  void _emailSifreRegister(String mailG, String sifreG) async {
+    var fireBaseUser = await _auth.createUserWithEmailAndPassword(
+        email: mailG, password: sifreG);
   }
 }
