@@ -3,7 +3,8 @@ import 'package:is_takip_flutter/models/users.dart';
 import 'package:is_takip_flutter/screens/panel.dart';
 import 'package:is_takip_flutter/screens/register_screen.dart';
 import 'package:is_takip_flutter/validation/login_validation.dart';
-
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -12,6 +13,9 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> with LoginValidationMixin {
   Users user = Users.empyty();
   var formKey = GlobalKey<FormState>();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  String gelenSifre;
+  String gelenMail;
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +52,8 @@ class _LoginScreenState extends State<LoginScreen> with LoginValidationMixin {
                     buildPassWord(),
                     SizedBox(height: 5.0),
                     buildSubmitButton(),
+                    SizedBox(height: 5.0),
+                    buildTestButton(),
                     RaisedButton(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0),
@@ -83,9 +89,8 @@ class _LoginScreenState extends State<LoginScreen> with LoginValidationMixin {
           borderRadius: BorderRadius.all(Radius.circular(10.0)),
         ),
       ),
-      validator: validateEmail,
-      onSaved: (String v) {
-        this.user.email = v;
+      onChanged: (String gM) {
+       gelenMail=gM;
       },
     );
   }
@@ -100,11 +105,25 @@ class _LoginScreenState extends State<LoginScreen> with LoginValidationMixin {
           borderRadius: BorderRadius.all(Radius.circular(10.0)),
         ),
       ),
-      validator: validatePassword,
-      onSaved: (String p) {
-        this.user.password = p;
+      onChanged: (String gS) {
+        gelenSifre=gS;
       },
     );
+  }
+
+  buildTestButton() {
+    return FlatButton(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        color: Colors.blue,
+        child: Text(
+          "      Kontrol       ",
+          style: TextStyle(color: Colors.white),
+        ),
+        onPressed: () {
+          _oturumAc(gelenMail, gelenSifre);
+        });
   }
 
   buildSubmitButton() {
@@ -118,12 +137,11 @@ class _LoginScreenState extends State<LoginScreen> with LoginValidationMixin {
           style: TextStyle(color: Colors.white),
         ),
         onPressed: () {
-          if (formKey.currentState.validate()) {
-            formKey.currentState.save();
-            print(user.email + " " + user.password);
-          }
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => Panel()));
         });
+  }
+  void _oturumAc(String mailGelen, String sifreGelen){
+    _auth.signInWithEmailAndPassword(email: mailGelen, password: sifreGelen).then((value) => debugPrint("giriş basarili"));
   }
 }
