@@ -56,7 +56,7 @@ class _LoginScreenState extends State<LoginScreen> with LoginValidationMixin {
                     SizedBox(height: 5.0),
                     buildTestButton(),
                     Row(
-                        crossAxisAlignment: CrossAxisAlignment.baseline,
+                        //crossAxisAlignment: CrossAxisAlignment.baseline,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Text(("Hesap Oluştur!")),
