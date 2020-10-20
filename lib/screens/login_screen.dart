@@ -5,6 +5,7 @@ import 'package:is_takip_flutter/screens/register_screen.dart';
 import 'package:is_takip_flutter/validation/login_validation.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
 class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -54,22 +55,27 @@ class _LoginScreenState extends State<LoginScreen> with LoginValidationMixin {
                     buildSubmitButton(),
                     SizedBox(height: 5.0),
                     buildTestButton(),
-                    RaisedButton(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      color: Colors.blue,
-                      child: Text(
-                        "    Kayıt Ol    ",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => RegisterScreen()));
-                      },
-                    )
+                    Row(
+                        crossAxisAlignment: CrossAxisAlignment.baseline,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(("Hesap Oluştur!")),
+                          FlatButton(
+                            //color: Colors.blue,
+                            child: Text(
+                              "    Kayıt Ol    ",
+                              style: TextStyle(color: Colors.blue),
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => RegisterScreen()));
+                            },
+                            //shape: RoundedRectangleBorder(
+                            //borderRadius: BorderRadius.circular(10.0),
+                          ),
+                        ]),
                   ],
                 ),
               ),
@@ -90,7 +96,7 @@ class _LoginScreenState extends State<LoginScreen> with LoginValidationMixin {
         ),
       ),
       onChanged: (String gM) {
-       gelenMail=gM;
+        gelenMail = gM;
       },
     );
   }
@@ -106,7 +112,7 @@ class _LoginScreenState extends State<LoginScreen> with LoginValidationMixin {
         ),
       ),
       onChanged: (String gS) {
-        gelenSifre=gS;
+        gelenSifre = gS;
       },
     );
   }
@@ -141,7 +147,10 @@ class _LoginScreenState extends State<LoginScreen> with LoginValidationMixin {
               context, MaterialPageRoute(builder: (context) => Panel()));
         });
   }
-  void _oturumAc(String mailGelen, String sifreGelen){
-    _auth.signInWithEmailAndPassword(email: mailGelen, password: sifreGelen).then((value) => debugPrint("giriş basarili"));
+
+  void _oturumAc(String mailGelen, String sifreGelen) {
+    _auth
+        .signInWithEmailAndPassword(email: mailGelen, password: sifreGelen)
+        .then((value) => debugPrint("giriş basarili"));
   }
 }
