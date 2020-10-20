@@ -33,8 +33,15 @@ class _SurecState extends State<Surec> {
               padding: const EdgeInsets.only(
                   left: 25, right: 25, bottom: 0, top: 10),
               child: RaisedButton(
-                  color: Colors.red.shade200,
-                  child: Text(surecler[position]),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(35.0),
+                  ),
+                  color: Colors.blue.shade50,
+                  child: Text(
+                    surecler[position],
+                    style:
+                        TextStyle(fontSize: 16.0, color: Colors.grey.shade800),
+                  ),
                   onPressed: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => SurecEkle()));
