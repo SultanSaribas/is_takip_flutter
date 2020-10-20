@@ -17,25 +17,15 @@ class _SurecEkleDbState extends State<SurecEkleDb> {
   var surecAdimlar = [];
   var surecAdim = ["test"];
   Map<String, dynamic> eklenen = Map();
-  Map<String, dynamic> steps = Map();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Süreç db ekle test"),
+        title: Text("Süreç Ekle/Düzenle"),
       ),
       body: Center(
           child: Column(
             children: <Widget>[
-              RaisedButton(
-                child: Text("db ekle"),
-                onPressed: _dbEkle,
-                color: Colors.blue.shade100,
-                shape: new RoundedRectangleBorder(
-                  borderRadius: new BorderRadius.circular(30.0),
-                ),
-              ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 0, top: 30),
                 child:
@@ -53,10 +43,6 @@ class _SurecEkleDbState extends State<SurecEkleDb> {
                         borderSide: BorderSide(),
                       ),
                     ),
-                    onChanged: (s) {
-
-                      steps["processName"] = s;
-                    },
                   ),
                 ),
               ),
@@ -82,19 +68,14 @@ class _SurecEkleDbState extends State<SurecEkleDb> {
                                     borderSide: BorderSide(),
                                   ),
                                 ),
-                                onChanged: (k) {
+                                onSubmitted: (k) {
                                   surecAdimlar[position] = k;
-                                  steps["adim $position"] = k;
                                 },
                               ),
                             ));
                       })),
-
-
-
             ],
           )),
-
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
@@ -113,9 +94,7 @@ class _SurecEkleDbState extends State<SurecEkleDb> {
       adimSayar++;
     });
   }
-  void _dbEkle() {
-    eklenen["steps"]=steps;
-
+  void _dbEkle(String a) {
     debugPrint("db ekle Button basildi ");
     _firestore.doc("/company/companyTest1/process/processTest").set(eklenen).then((v) => debugPrint(
         "data eklendi"));

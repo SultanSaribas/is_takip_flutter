@@ -20,7 +20,7 @@ class _SurecEkleState extends State<SurecEkle> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Süreç Ekle/Düzenle"),
+        title: Text("Süreç Ekle/Düzenleee"),
       ),
       body: Center(
           child: Column(
@@ -67,7 +67,7 @@ class _SurecEkleState extends State<SurecEkle> {
                                 borderSide: BorderSide(),
                               ),
                             ),
-                            onSubmitted: (k) {
+                            onChanged: (k) {
                               surecAdimlar[position] = k;
                             },
                           ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:is_takip_flutter/models/users.dart';
 import 'package:is_takip_flutter/screens/panel.dart';
 import 'package:is_takip_flutter/screens/register_screen.dart';
+import 'package:is_takip_flutter/screens/testSayfasi.dart';
 import 'package:is_takip_flutter/validation/login_validation.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -71,6 +72,21 @@ class _LoginScreenState extends State<LoginScreen> with LoginValidationMixin {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => RegisterScreen()));
+                            },
+                            //shape: RoundedRectangleBorder(
+                            //borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          FlatButton(
+                            //color: Colors.blue,
+                            child: Text(
+                              "    teste git    ",
+                              style: TextStyle(color: Colors.blue),
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => SurecEkleDb()));
                             },
                             //shape: RoundedRectangleBorder(
                             //borderRadius: BorderRadius.circular(10.0),
