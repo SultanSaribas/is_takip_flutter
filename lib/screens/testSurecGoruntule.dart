@@ -18,7 +18,8 @@ class _surecTestState extends State<surecTest> {
 
   @override
   initState()  {
-    _surecYenile();
+    //_surecYenile();
+    _tumDocOku();
   }
 
   @override
@@ -33,7 +34,20 @@ class _surecTestState extends State<surecTest> {
             child: Text("yenile"),
             onPressed: () {
               setState(() {
-                  
+                _tumDocOku();
+              });
+            },
+            color: Colors.blue.shade100,
+            shape: new RoundedRectangleBorder(
+              borderRadius: new BorderRadius.circular(30.0),
+            ),
+          ),
+          RaisedButton(
+            child: Text("yeni yenile"),
+            onPressed: () {
+              _tumDocOku();
+              setState(() {
+
               });
             },
             color: Colors.blue.shade100,
@@ -80,10 +94,21 @@ class _surecTestState extends State<surecTest> {
       ),
     );
   }
-  void _surecYenile() async {
+  void _tumDocOku()  {
+    String eklenecek ;
+    _firestore.collection("/company/companyTest_2/process").get().then((querysnapshot){
+      debugPrint("process koleksiyonundaki eleman sayisi:" + querysnapshot.docs.length.toString());
+      for(int i=0 ; i<querysnapshot.docs.length ; i++){
+        eklenecek=querysnapshot.docs[i].data()["processName"].toString();
+        surecler.add(eklenecek);
+        //debugPrint(querysnapshot.docs[i].data()["name"].toString()); //tüm dataların sadece name verisini oku
+      }
+    });
+  }
+  /*void _surecYenile() async {
 
-    DocumentSnapshot docsnap = await _firestore.doc("/company/companyTest_2/process/$processId"+"2").get();
-   String eklenecek = docsnap.data()["processName"].toString();
+    DocumentSnapshot docsnap = await _firestore.doc("/company/companyTest_2/process/$processId"+"1").get();
+   String eklenecek ;
 
     debugPrint("deneme calisiyor ");
     int i=1;
@@ -94,5 +119,6 @@ class _surecTestState extends State<surecTest> {
       surecler.add(eklenecek);
       i++;
     }
-  }
+    debugPrint("whiledan çıktım ben");
+  }*/
 }

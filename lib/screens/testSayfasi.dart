@@ -27,82 +27,77 @@ class _SurecEkleDbState extends State<SurecEkleDb> {
       ),
       body: Center(
           child: Column(
-            children: <Widget>[
-              RaisedButton(
-                child: Text("db ekle"),
-                onPressed: _dbEkle,
-                color: Colors.blue.shade100,
-                shape: new RoundedRectangleBorder(
-                  borderRadius: new BorderRadius.circular(30.0),
-                ),
-              ),
-              RaisedButton(
-                child: Text("yazdir"),
-                onPressed: _dbYazdir,
-                color: Colors.blue.shade100,
-                shape: new RoundedRectangleBorder(
-                  borderRadius: new BorderRadius.circular(30.0),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 0, top: 30),
-                child:
+        children: <Widget>[
+          RaisedButton(
+            child: Text("db ekle"),
+            onPressed: _dbEkle,
+            color: Colors.blue.shade100,
+            shape: new RoundedRectangleBorder(
+              borderRadius: new BorderRadius.circular(30.0),
+            ),
+          ),
+          RaisedButton(
+            child: Text("yazdir"),
+            onPressed: _dbYazdir,
+            color: Colors.blue.shade100,
+            shape: new RoundedRectangleBorder(
+              borderRadius: new BorderRadius.circular(30.0),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 0, top: 30),
+            child:
                 Text("Önce Süreç Adını Daha Sonra Adımları Girerek Kaydedin"),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(30),
-                child: Container(
-                  margin: EdgeInsets.only(left: 30, right: 30),
-                  child: TextField(
-                    obscureText: false,
-                    decoration: InputDecoration(
-                      labelText: "Süreç Adını Giriniz",
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(),
-                      ),
-                    ),
-                    onChanged: (s) {
-
-                      eklenen["processName"] = s;
-                    },
+          ),
+          Padding(
+            padding: const EdgeInsets.all(30),
+            child: Container(
+              margin: EdgeInsets.only(left: 30, right: 30),
+              child: TextField(
+                obscureText: false,
+                decoration: InputDecoration(
+                  labelText: "Süreç Adını Giriniz",
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(),
                   ),
                 ),
+                onChanged: (s) {
+                  eklenen["processName"] = s;
+                },
               ),
-              Expanded(
-                  child: ListView.builder(
-                      itemCount: surecAdimlar.length,
-                      itemBuilder: (context, position) {
-                        return Padding(
-                            padding: const EdgeInsets.all(1),
-                            child: Container(
-                              margin: EdgeInsets.only(left: 60, right: 60),
-                              child: TextField(
-                                obscureText: false,
-                                keyboardType: TextInputType.text,
-                                textInputAction: TextInputAction.done,
-                                maxLength: 50,
-                                maxLines: 1,
-                                decoration: InputDecoration(
-                                  hintText: "Adım ismini giriniz",
-                                  labelText: surecAdimlar[position],
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(25.0),
-                                    borderSide: BorderSide(),
-                                  ),
-                                ),
-                                onChanged: (k) {
-                                  surecAdimlar[position] = k;
-                                  steps["adim $position"] = k;
-                                },
+            ),
+          ),
+          Expanded(
+              child: ListView.builder(
+                  itemCount: surecAdimlar.length,
+                  itemBuilder: (context, position) {
+                    return Padding(
+                        padding: const EdgeInsets.all(1),
+                        child: Container(
+                          margin: EdgeInsets.only(left: 60, right: 60),
+                          child: TextField(
+                            obscureText: false,
+                            keyboardType: TextInputType.text,
+                            textInputAction: TextInputAction.done,
+                            maxLength: 50,
+                            maxLines: 1,
+                            decoration: InputDecoration(
+                              hintText: "Adım ismini giriniz",
+                              labelText: surecAdimlar[position],
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(25.0),
+                                borderSide: BorderSide(),
                               ),
-                            ));
-                      })),
-
-
-
-            ],
-          )),
-
+                            ),
+                            onChanged: (k) {
+                              surecAdimlar[position] = k;
+                              steps["adim $position"] = k;
+                            },
+                          ),
+                        ));
+                  })),
+        ],
+      )),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
@@ -121,19 +116,20 @@ class _SurecEkleDbState extends State<SurecEkleDb> {
       adimSayar++;
     });
   }
-  void _dbEkle() {
-    eklenen["steps"]=steps;
 
-    debugPrint("db ekle Button basildi ");
-    _firestore.doc("/company/companyTest_2/process/process_test_2").set(eklenen).then((v) => debugPrint(
-        "data eklendi"));
-
+  void _dbEkle() async {
+    eklenen["steps"] = steps;
+    _firestore
+        .collection("/company/companyTest_2/process").doc()
+        .set(eklenen)
+        .then((v) => debugPrint("data eklendi"));
   }
+
   void _dbYazdir() async {
-    DocumentSnapshot docsnap = await _firestore.doc("/company/companyTest1/process/processTest").get();
+    DocumentSnapshot docsnap =
+        await _firestore.doc("/company/companyTest1/process/processTest").get();
     debugPrint(docsnap.data()["processName"].toString());
     debugPrint(docsnap.toString());
-
   }
 }
 
