@@ -36,6 +36,14 @@ class _SurecEkleDbState extends State<SurecEkleDb> {
                   borderRadius: new BorderRadius.circular(30.0),
                 ),
               ),
+              RaisedButton(
+                child: Text("yazdir"),
+                onPressed: _dbYazdir,
+                color: Colors.blue.shade100,
+                shape: new RoundedRectangleBorder(
+                  borderRadius: new BorderRadius.circular(30.0),
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 0, top: 30),
                 child:
@@ -55,7 +63,7 @@ class _SurecEkleDbState extends State<SurecEkleDb> {
                     ),
                     onChanged: (s) {
 
-                      steps["processName"] = s;
+                      eklenen["processName"] = s;
                     },
                   ),
                 ),
@@ -117,8 +125,14 @@ class _SurecEkleDbState extends State<SurecEkleDb> {
     eklenen["steps"]=steps;
 
     debugPrint("db ekle Button basildi ");
-    _firestore.doc("/company/companyTest1/process/processTest").set(eklenen).then((v) => debugPrint(
+    _firestore.doc("/company/companyTest_2/process/process_test_2").set(eklenen).then((v) => debugPrint(
         "data eklendi"));
+
+  }
+  void _dbYazdir() async {
+    DocumentSnapshot docsnap = await _firestore.doc("/company/companyTest1/process/processTest").get();
+    debugPrint(docsnap.data()["processName"].toString());
+    debugPrint(docsnap.toString());
 
   }
 }

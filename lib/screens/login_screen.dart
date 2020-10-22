@@ -3,6 +3,7 @@ import 'package:is_takip_flutter/models/users.dart';
 import 'package:is_takip_flutter/screens/panel.dart';
 import 'package:is_takip_flutter/screens/register_screen.dart';
 import 'package:is_takip_flutter/screens/testSayfasi.dart';
+import 'package:is_takip_flutter/screens/testSurecGoruntule.dart';
 import 'package:is_takip_flutter/validation/login_validation.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -56,6 +57,19 @@ class _LoginScreenState extends State<LoginScreen> with LoginValidationMixin {
                     buildSubmitButton(),
                     SizedBox(height: 5.0),
                     buildTestButton(),
+                    FlatButton(
+                      //color: Colors.blue,
+                      child: Text(
+                        "   surec goruntule teste git    ",
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => surecTest()));
+                      },
+                    ),
                     Row(
                         //crossAxisAlignment: CrossAxisAlignment.baseline,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -79,7 +93,7 @@ class _LoginScreenState extends State<LoginScreen> with LoginValidationMixin {
                           FlatButton(
                             //color: Colors.blue,
                             child: Text(
-                              "    teste git    ",
+                              "   surec ekle teste git    ",
                               style: TextStyle(color: Colors.blue),
                             ),
                             onPressed: () {
@@ -88,9 +102,8 @@ class _LoginScreenState extends State<LoginScreen> with LoginValidationMixin {
                                   MaterialPageRoute(
                                       builder: (context) => SurecEkleDb()));
                             },
-                            //shape: RoundedRectangleBorder(
-                            //borderRadius: BorderRadius.circular(10.0),
                           ),
+
                         ]),
                   ],
                 ),
