@@ -3,7 +3,7 @@ class Users {
   String email;
   String password;
 
-  Users.empyty() {}
+  Users.empyty();
   Users(this.email, this.password);
 
   String get getEmail {

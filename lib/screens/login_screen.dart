@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:is_takip_flutter/models/users.dart';
+import 'package:is_takip_flutter/screens/customer_add_test.dart';
 import 'package:is_takip_flutter/screens/panel.dart';
 import 'package:is_takip_flutter/screens/register_screen.dart';
 import 'package:is_takip_flutter/screens/testSayfasi.dart';
@@ -68,6 +69,19 @@ class _LoginScreenState extends State<LoginScreen> with LoginValidationMixin {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => surecTest()));
+                      },
+                    ),
+                    FlatButton(
+                      //color: Colors.blue,
+                      child: Text(
+                        "   Müşteri ekleme test sayfasına gider   ",
+                        style: TextStyle(color: Colors.pink),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => CustomerAddTest()));
                       },
                     ),
                     Row(
