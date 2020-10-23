@@ -118,11 +118,30 @@ class _SurecEkleDbState extends State<SurecEkleDb> {
   }
 
   void _dbEkle() async {
+    int temp; //kontrol için
     eklenen["steps"] = steps;
     _firestore
-        .collection("/company/companyTest_2/process").doc()
-        .set(eklenen)
-        .then((v) => debugPrint("data eklendi"));
+        .collection("/company/companyTest_2/process")
+        .get()
+        .then((querysnapshot) {
+      for (int i = 0; i < querysnapshot.docs.length; i++) {
+        if (eklenen["processName"] !=
+            querysnapshot.docs[i].data()["processName"].toString()) {
+          temp=1;
+        }
+        else
+          {temp=0;}
+      }
+      if (temp == 1) {
+        _firestore
+            .collection("/company/companyTest_2/process")
+            .doc()
+            .set(eklenen)
+            .then((v) => debugPrint("data eklendi"));
+      } else {
+        debugPrint(" sürec ismi kullanılıyor ");
+      }
+    });
   }
 
   void _dbYazdir() async {
