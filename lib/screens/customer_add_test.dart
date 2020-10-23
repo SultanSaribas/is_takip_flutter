@@ -29,7 +29,7 @@ class _CustomerAddTestState extends State<CustomerAddTest> {
     "Bel Daraltma"
   ];
   String secilenSurec = "Paça Daraltma";
-  bool checBoxState = false;
+  bool checkBoxState = false;
   @override
   Widget build(BuildContext context) {
 /*
@@ -121,6 +121,7 @@ class _CustomerAddTestState extends State<CustomerAddTest> {
                               onChanged: (s) {
                                 setState(() {
                                   secilenSurec = s;
+                                  serviceMap['process'] = secilenSurec;
                                 });
                               },
                               value: secilenSurec,
@@ -144,10 +145,11 @@ class _CustomerAddTestState extends State<CustomerAddTest> {
                     FontAwesome5.lira_sign,
                     color: Colors.lightBlue,
                   ),
-                  value: checBoxState,
+                  value: checkBoxState,
                   onChanged: (secildi) {
                     setState(() {
-                      checBoxState = secildi;
+                      checkBoxState = secildi;
+                      serviceMap['paymentState'] = checkBoxState;
                     });
                   }),
               Padding(
@@ -181,7 +183,7 @@ class _CustomerAddTestState extends State<CustomerAddTest> {
     int temp;
     String tempCustomerID; //kontrol için
     _firestore
-        .collection("/company/companyTest_2/customers")
+        .collection("/company/company_test_2/customers")
         .get()
         .then((querysnapshot) {
       for (int i = 0; i < querysnapshot.docs.length; i++) {
@@ -194,7 +196,7 @@ class _CustomerAddTestState extends State<CustomerAddTest> {
       }
       if (temp == 1) {
         _firestore
-            .collection("/company/companyTest_2/customers")
+            .collection("/company/company_test_2/customers")
             .doc()
             .set(mapCustomer)
             .then((v) => debugPrint("data eklendie"));
@@ -213,7 +215,7 @@ class _CustomerAddTestState extends State<CustomerAddTest> {
     });
 
     _firestore
-        .collection("/company/companyTest_2/services")
+        .collection("/company/company_test_2/services")
         .doc()
         .set(serviceMap)
         .then((v) => debugPrint("data eklendi"));
