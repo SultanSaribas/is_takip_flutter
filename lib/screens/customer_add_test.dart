@@ -203,17 +203,21 @@ class _CustomerAddTestState extends State<CustomerAddTest> {
       } else {
         debugPrint(" telefon numarası kullanılıyor ");
       }
-      for (int i = 0; i < querysnapshot.docs.length; i++) {
+
+    });
+    _firestore
+        .collection("/company/company_test_2/customers")
+        .get()
+        .then((querysnapshot2) {
+      for (int j = -1; j < querysnapshot2.docs.length; j++) {
         if (mapCustomer["phoneNumber"] ==
-            querysnapshot.docs[i].data()["phoneNumber"].toString()) {
-          tempCustomerID = querysnapshot.docs[i].id.toString();
-          serviceMap["customersID"] = tempCustomerID;
+            querysnapshot2.docs[j].data()["phoneNumber"].toString()) {
+          serviceMap["customersID"] = querysnapshot2.docs[j].id.toString();
           debugPrint("alt kontrol if içi");
-          debugPrint(tempCustomerID);
+          debugPrint(serviceMap["customersID"]);
         }
       }
     });
-
     _firestore
         .collection("/company/company_test_2/services")
         .doc()

@@ -3,6 +3,7 @@ import 'package:is_takip_flutter/models/users.dart';
 import 'package:is_takip_flutter/screens/customer_add_test.dart';
 import 'package:is_takip_flutter/screens/panel.dart';
 import 'package:is_takip_flutter/screens/register_screen.dart';
+import 'package:is_takip_flutter/screens/satici_giris_test.dart';
 import 'package:is_takip_flutter/screens/testSayfasi.dart';
 import 'package:is_takip_flutter/screens/testSurecGoruntule.dart';
 import 'package:is_takip_flutter/validation/login_validation.dart';
@@ -69,6 +70,19 @@ class _LoginScreenState extends State<LoginScreen> with LoginValidationMixin {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => surecTest()));
+                      },
+                    ),
+                    FlatButton(
+                      //color: Colors.blue,
+                      child: Text(
+                        "  aktif siparisleri test   ",
+                        style: TextStyle(color: Colors.pink),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SaticiGirisTest()));
                       },
                     ),
                     FlatButton(

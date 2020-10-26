@@ -121,7 +121,7 @@ class _SurecEkleDbState extends State<SurecEkleDb> {
     int temp; //kontrol için
     eklenen["steps"] = steps;
     _firestore
-        .collection("/company/companyTest_2/process")
+        .collection("/company/company_test_2/process")
         .get()
         .then((querysnapshot) {
       for (int i = 0; i < querysnapshot.docs.length; i++) {
@@ -134,7 +134,7 @@ class _SurecEkleDbState extends State<SurecEkleDb> {
       }
       if (temp == 1) {
         _firestore
-            .collection("/company/companyTest_2/process")
+            .collection("/company/company_test_2/process")
             .doc()
             .set(eklenen)
             .then((v) => debugPrint("data eklendi"));
@@ -146,7 +146,7 @@ class _SurecEkleDbState extends State<SurecEkleDb> {
 
   void _dbYazdir() async {
     DocumentSnapshot docsnap =
-        await _firestore.doc("/company/companyTest1/process/processTest").get();
+        await _firestore.doc("/company/company_test_2/process").get();
     debugPrint(docsnap.data()["processName"].toString());
     debugPrint(docsnap.toString());
   }
