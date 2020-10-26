@@ -180,7 +180,8 @@ class _CustomerAddTestState extends State<CustomerAddTest> {
   }
 
   void _dbEkle1() async {
-    int temp;
+    int temp = 0;
+    String tempID;
     String tempCustomerID; //kontrol için
     _firestore
         .collection("/company/company_test_2/customers")
@@ -193,36 +194,49 @@ class _CustomerAddTestState extends State<CustomerAddTest> {
         } else {
           temp = 0;
         }
+
       }
       if (temp == 1) {
+        tempID=_firestore.collection("/company/company_test_2/customers").doc().id;
+        mapCustomer["customersID"]=tempID;
+        serviceMap["customersID"]=tempID;
         _firestore
             .collection("/company/company_test_2/customers")
-            .doc()
+            .doc(tempID)
             .set(mapCustomer)
-            .then((v) => debugPrint("data eklendie"));
+            .then((v) => debugPrint("telefon numarası yoktu eklendi"));
       } else {
-        debugPrint(" telefon numarası kullanılıyor ");
-      }
 
-    });
-    _firestore
-        .collection("/company/company_test_2/customers")
-        .get()
-        .then((querysnapshot2) {
-      for (int j = -1; j < querysnapshot2.docs.length; j++) {
-        if (mapCustomer["phoneNumber"] ==
-            querysnapshot2.docs[j].data()["phoneNumber"].toString()) {
-          serviceMap["customersID"] = querysnapshot2.docs[j].id.toString();
-          debugPrint("alt kontrol if içi");
-          debugPrint(serviceMap["customersID"]);
+        debugPrint(" telefon numarası kullanılıyor ");
+        for (int j = 0; j < querysnapshot.docs.length+1; j++) {
+          if (mapCustomer["phoneNumber"] ==
+              querysnapshot.docs[j].data()["phoneNumber"].toString()) {
+            tempID=querysnapshot.docs[j].id;
+            debugPrint("if ici tempID $tempID");
+            serviceMap["customersID"] = tempID;
+            debugPrint("if ici map "+serviceMap["customersID"]);
+          }
         }
       }
+      _firestore
+          .collection("/company/company_test_2/services")
+          .doc()
+          .set(serviceMap)
+          .then((v) => debugPrint("data eklendi"));
     });
+
+
+
+  }
+  void _ekle() async {
+    debugPrint("İKİNCİ FONKSİYON CALISTI");
+   String tempID=_firestore.collection("/company/company_test_2/customers").doc().id;
+    mapCustomer["customersID"]=tempID;
     _firestore
-        .collection("/company/company_test_2/services")
-        .doc()
-        .set(serviceMap)
-        .then((v) => debugPrint("data eklendi"));
+        .collection("/company/company_test_2/customers")
+        .doc(tempID)
+        .set(mapCustomer)
+        .then((v) => debugPrint("telefon numarası yoktu eklendi"));
   }
 }
 
