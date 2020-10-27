@@ -206,7 +206,6 @@ class _CustomerAddTestState extends State<CustomerAddTest> {
             .set(mapCustomer)
             .then((v) => debugPrint("telefon numarası yoktu eklendi"));
       } else {
-
         debugPrint(" telefon numarası kullanılıyor ");
         for (int j = 0; j < querysnapshot.docs.length+1; j++) {
           if (mapCustomer["phoneNumber"] ==
@@ -222,7 +221,7 @@ class _CustomerAddTestState extends State<CustomerAddTest> {
           .collection("/company/company_test_2/services")
           .doc()
           .set(serviceMap)
-          .then((v) => debugPrint("data eklendi"));
+          .then((v) => debugPrint("service data eklendi"));
     });
 
 
