@@ -207,7 +207,7 @@ class _CustomerAddTestState extends State<CustomerAddTest> {
             .then((v) => debugPrint("telefon numarası yoktu eklendi"));
       } else {
         debugPrint(" telefon numarası kullanılıyor ");
-        for (int j = 0; j < querysnapshot.docs.length+1; j++) {
+        for (int j = 0; j < querysnapshot.docs.length; j++) {
           if (mapCustomer["phoneNumber"] ==
               querysnapshot.docs[j].data()["phoneNumber"].toString()) {
             tempID=querysnapshot.docs[j].id;
@@ -217,6 +217,9 @@ class _CustomerAddTestState extends State<CustomerAddTest> {
           }
         }
       }
+      debugPrint("if dısı map "+serviceMap["customersID"]);
+      debugPrint("if dısı map "+tempID);
+
       _firestore
           .collection("/company/company_test_2/services")
           .doc()
