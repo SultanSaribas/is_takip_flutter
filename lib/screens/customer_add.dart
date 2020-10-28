@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fluttericon/font_awesome_icons.dart';
 
 class CustomerAdd extends StatefulWidget {
@@ -11,12 +12,14 @@ class CustomerAdd extends StatefulWidget {
 }
 
 class _CustomerAddState extends State<CustomerAdd> {
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   var customerID = "12";
   String name = "";
   String phoneNumber = " ";
-  String note = " ";
-  double tutar = 0;
-  Map<String, dynamic> mapCustomer = Map();
+  String note = "";
+  var tutar;
+  Map<String, dynamic> customerMap = Map();
+  Map<String, dynamic> serviceMap = Map();
 
   List<String> surec = [
     "Paça Daraltma",
@@ -25,7 +28,7 @@ class _CustomerAddState extends State<CustomerAdd> {
     "Bel Daraltma"
   ];
   String secilenSurec = "Paça Daraltma";
-  bool checBoxState = false;
+  bool checkBoxState = false;
   @override
   Widget build(BuildContext context) {
 /*
@@ -50,10 +53,10 @@ class _CustomerAddState extends State<CustomerAdd> {
                       hintText: "Ad-Soyad",
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10)))),
-                  onSubmitted: (s) {
+                  onChanged: (s) {
                     debugPrint("alınan isim $s");
                     name = s;
-                    mapCustomer['name'] = name;
+                    customerMap['name'] = name;
                   },
                 ),
               ),
@@ -67,26 +70,26 @@ class _CustomerAddState extends State<CustomerAdd> {
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                   ),
-                  onSubmitted: (s) {
+                  onChanged: (s) {
                     debugPrint("alınan telefon numarası $s");
-                    name = s;
-                    mapCustomer['phone'] = phoneNumber;
+                    phoneNumber = s;
+                    customerMap['phone'] = phoneNumber;
                   },
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.all(10),
                 child: TextField(
-                  keyboardType: TextInputType.phone,
+                  keyboardType: TextInputType.multiline,
                   decoration: InputDecoration(
                     labelText: "NOT EKLE",
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                   ),
-                  onSubmitted: (s) {
+                  onChanged: (s) {
                     debugPrint("alınan Not $s");
-                    name = s;
-                    mapCustomer['note'] = note;
+                    note = s;
+                    serviceMap['note'] = note;
                   },
                 ),
               ),
@@ -117,6 +120,7 @@ class _CustomerAddState extends State<CustomerAdd> {
                               onChanged: (s) {
                                 setState(() {
                                   secilenSurec = s;
+                                  serviceMap['process'] = secilenSurec;
                                 });
                               },
                               value: secilenSurec,
@@ -140,25 +144,26 @@ class _CustomerAddState extends State<CustomerAdd> {
                     FontAwesome5.lira_sign,
                     color: Colors.lightBlue,
                   ),
-                  value: checBoxState,
+                  value: checkBoxState,
                   onChanged: (secildi) {
                     setState(() {
-                      checBoxState = secildi;
+                      checkBoxState = secildi;
+                      serviceMap['paymentState'] = checkBoxState;
                     });
                   }),
               Padding(
                 padding: const EdgeInsets.only(left: 150, right: 150),
                 child: TextField(
-                  keyboardType: TextInputType.phone,
+                  keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     labelText: "Tutar",
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                   ),
-                  onSubmitted: (s) {
+                  onChanged: (s) {
                     debugPrint("alınan tutar $s");
-                    name = s;
-                    mapCustomer['cost'] = tutar;
+                    tutar = s;
+                    serviceMap['cost'] = tutar;
                   },
                 ),
               ),
@@ -167,10 +172,62 @@ class _CustomerAddState extends State<CustomerAdd> {
                   // TOAST MESSAGE YAPILABİLİR
                   child: Text("KAYDET"),
                   color: Colors.blue.shade50,
-                  onPressed: () {}),
+                  onPressed: _dbEkle1),
             ],
           ),
         ));
+  }
+
+  void _dbEkle1() async {
+    int temp = 0;
+    String tempID;
+    String tempCustomerID; //kontrol için
+    _firestore
+        .collection("/company/company_test_2/customers")
+        .get()
+        .then((querysnapshot) {
+      for (int i = 0; i < querysnapshot.docs.length; i++) {
+        if (customerMap["phoneNumber"] !=
+            querysnapshot.docs[i].data()["phoneNumber"].toString()) {
+          temp = 1;
+        } else {
+          temp = 0;
+        }
+
+      }
+      if (temp == 1) {
+        tempID=_firestore.collection("/company/company_test_2/customers").doc().id;
+        customerMap["customersID"]=tempID;
+        serviceMap["customersID"]=tempID;
+        _firestore
+            .collection("/company/company_test_2/customers")
+            .doc(tempID)
+            .set(customerMap)
+            .then((v) => debugPrint("telefon numarası yoktu eklendi"));
+      } else {
+        debugPrint(" telefon numarası kullanılıyor ");
+        for (int j = 0; j < querysnapshot.docs.length; j++) {
+          if (customerMap["phoneNumber"] ==
+              querysnapshot.docs[j].data()["phoneNumber"].toString()) {
+            tempID=querysnapshot.docs[j].id;
+            debugPrint("if ici tempID $tempID");
+            serviceMap["customersID"] = tempID;
+            debugPrint("if ici map "+serviceMap["customersID"]);
+          }
+        }
+      }
+      debugPrint("if dısı map "+serviceMap["customersID"]);
+      debugPrint("if dısı map "+tempID);
+
+      _firestore
+          .collection("/company/company_test_2/services")
+          .doc()
+          .set(serviceMap)
+          .then((v) => debugPrint("service data eklendi"));
+    });
+
+
+
   }
 }
 

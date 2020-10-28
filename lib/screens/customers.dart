@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:is_takip_flutter/screens/customer_add.dart';
 import 'package:is_takip_flutter/screens/customer_profile.dart';
 
 class Customers extends StatefulWidget {
@@ -71,7 +72,12 @@ class _CustomersState extends State<Customers> {
         title: Text(title),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => CustomerAdd(),
+              ));},
         child: Icon(
           Icons.add,
           size: 48.0,

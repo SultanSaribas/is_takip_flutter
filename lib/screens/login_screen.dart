@@ -98,41 +98,45 @@ class _LoginScreenState extends State<LoginScreen> with LoginValidationMixin {
                                 builder: (context) => CustomerAddTest()));
                       },
                     ),
-                    Row(
-                        //crossAxisAlignment: CrossAxisAlignment.baseline,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text(("Hesap Oluştur!")),
-                          FlatButton(
-                            //color: Colors.blue,
-                            child: Text(
-                              "    Kayıt Ol    ",
-                              style: TextStyle(color: Colors.blue),
-                            ),
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => RegisterScreen()));
-                            },
-                            //shape: RoundedRectangleBorder(
-                            //borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          FlatButton(
-                            //color: Colors.blue,
-                            child: Text(
-                              "   surec ekle teste git    ",
-                              style: TextStyle(color: Colors.blue),
-                            ),
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => SurecEkleDb()));
-                            },
-                          ),
+                      Row(
+                            //crossAxisAlignment: CrossAxisAlignment.baseline,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Text(("Hesap Oluştur!")),
+                              Expanded(
+                                child: FlatButton(
+                                  //color: Colors.blue,
+                                  child: Text(
+                                    "    Kayıt Ol    ",
+                                    style: TextStyle(color: Colors.blue),
+                                  ),
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => RegisterScreen()));
+                                  },
+                                  //shape: RoundedRectangleBorder(
+                                  //borderRadius: BorderRadius.circular(10.0),
+                                ),
+                              ),
+                              Expanded(
+                                child: FlatButton(
+                                  //color: Colors.blue,
+                                  child: Text(
+                                    "   surec ekle teste git    ",
+                                    style: TextStyle(color: Colors.blue),
+                                  ),
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => SurecEkleDb()));
+                                  },
+                                ),
+                              ),
 
-                        ]),
+                            ]),
                   ],
                 ),
               ),
