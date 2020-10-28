@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
@@ -14,8 +15,6 @@ class SaticiGirisTest extends StatefulWidget {
 class _SaticiGirisTestState extends State<SaticiGirisTest> {
   //bool isSwitched = false;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-
-
   int i = 0;
   List<bool> payment = [false, false, false, false, false, false];
   var customerNames = [
@@ -26,11 +25,31 @@ class _SaticiGirisTestState extends State<SaticiGirisTest> {
     "Emre",
     "Burak",
   ];
-  var siparisler = [
-  ];
-  String eklenecek;
+  var notes = [];
+  String note ;
+  void  _siparisleriGetir()  {
+      _firestore.collection("/company/company_test_2/services").get().then((querysnapshot){
+        debugPrint("services koleksiyonundaki eleman sayisi:" + querysnapshot.docs.length.toString());
+        for(int i=0 ; i<querysnapshot.docs.length ; i++){
+          note=querysnapshot.docs[i].data()["note"].toString();
+          notes.add(note);
+          //debugPrint(querysnapshot.docs[i].data()["name"].toString()); //tüm dataların sadece note verisini oku
+        }
+      });
 
+  }
 
+ @override
+  void initState() {
+   setState(() {
+     super.initState();
+     debugPrint("Çalışıyorum");
+
+       _siparisleriGetir();
+     debugPrint("${notes.length}");
+   });
+
+  }
 
 
   @override
@@ -43,7 +62,7 @@ class _SaticiGirisTestState extends State<SaticiGirisTest> {
         ),
       ),
       body: ListView.builder(
-        itemCount: siparisler.length,
+        itemCount: notes.length,
         itemBuilder: (context, position) {
           return Column(children: <Widget>[
             Container(
@@ -67,7 +86,11 @@ class _SaticiGirisTestState extends State<SaticiGirisTest> {
                     ]),
                     Column(children: <Widget>[
                       Divider(height: 36.0),
-                      Text("\n" + siparisler[position]),
+                      Text(
+
+                          "\n" + notes[position],
+
+                        ),
                       Text(
                           "Devam Ediyor"), // durum bilgisi çekilecek veritabanından
                     ]),
@@ -151,15 +174,5 @@ class _SaticiGirisTestState extends State<SaticiGirisTest> {
       debugPrint(payment[i].toString());
     }
   }
-  void _siparisleriGetir()  {
-    String eklenecek ;
-    _firestore.collection("/company/company_test_2/services").get().then((querysnapshot){
-      debugPrint("services koleksiyonundaki eleman sayisi:" + querysnapshot.docs.length.toString());
-      for(int i=0 ; i<querysnapshot.docs.length ; i++){
-        eklenecek=querysnapshot.docs[i].data()["note"].toString();
-        siparisler.add(eklenecek);
-        //debugPrint(querysnapshot.docs[i].data()["name"].toString()); //tüm dataların sadece name verisini oku
-      }
-    });
-  }
+
 }

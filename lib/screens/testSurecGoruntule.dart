@@ -96,7 +96,7 @@ class _surecTestState extends State<surecTest> {
   }
   void _tumDocOku()  {
     String eklenecek ;
-    _firestore.collection("/company/companyTest_2/process").get().then((querysnapshot){
+    _firestore.collection("/company/company_test_2/process").get().then((querysnapshot){
       debugPrint("process koleksiyonundaki eleman sayisi:" + querysnapshot.docs.length.toString());
       for(int i=0 ; i<querysnapshot.docs.length ; i++){
         eklenecek=querysnapshot.docs[i].data()["processName"].toString();
