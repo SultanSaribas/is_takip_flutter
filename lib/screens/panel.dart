@@ -1,10 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:is_takip_flutter/screens/company_inprogress.dart';
 import 'package:is_takip_flutter/screens/customers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:is_takip_flutter/screens/satici_giris.dart';
-import 'package:is_takip_flutter/screens/kayitli_surec.dart';
+import 'package:is_takip_flutter/screens/company_completed.dart';
+import 'package:is_takip_flutter/screens/processes.dart';
 
 class Panel extends StatefulWidget {
   @override
@@ -129,7 +130,7 @@ class _PanelState extends State {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => SaticiGiris(),
+                            builder: (context) => CompanyInProgress(),
                           ));
                     }),
               ),
@@ -172,7 +173,7 @@ class _PanelState extends State {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => SaticiGiris(),
+                          builder: (context) => CompanyCompleted(),
                         ));
                   },
                 ),
@@ -214,7 +215,7 @@ class _PanelState extends State {
                   ),
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Surec()));
+                        MaterialPageRoute(builder: (context) => Processes()));
                   },
                 ),
               ),

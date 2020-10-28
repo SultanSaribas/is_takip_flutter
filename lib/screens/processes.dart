@@ -2,14 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:is_takip_flutter/screens/surec_ekle.dart';
+import 'package:is_takip_flutter/screens/process_add.dart';
 
-class Surec extends StatefulWidget {
+class Processes extends StatefulWidget {
   @override
-  _SurecState createState() => _SurecState();
+  _ProcessesState createState() => _ProcessesState();
 }
 
-class _SurecState extends State<Surec> {
+class _ProcessesState extends State<Processes> {
   String surecAdi = "Surec1";
   int i = 0;
   var surecler = [
@@ -44,7 +44,7 @@ class _SurecState extends State<Surec> {
                   ),
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => SurecEkle()));
+                        MaterialPageRoute(builder: (context) => ProcessAdd()));
                   } //_yazdir,
                   ),
             );
@@ -54,7 +54,7 @@ class _SurecState extends State<Surec> {
         onPressed: () {
           //_ekle();
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => SurecEkle()));
+              context, MaterialPageRoute(builder: (context) => ProcessAdd()));
         },
       ),
     );

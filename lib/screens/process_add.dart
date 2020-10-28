@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-class SurecEkle extends StatefulWidget {
+class ProcessAdd extends StatefulWidget {
   @override
-  _SurecEkleState createState() => _SurecEkleState();
+  _ProcessAddState createState() => _ProcessAddState();
 }
 
-class _SurecEkleState extends State<SurecEkle> {
+class _ProcessAddState extends State<ProcessAdd> {
   String surec = "Surec1";
   int i = 0;
   int adimSayar = 0;
@@ -20,7 +20,7 @@ class _SurecEkleState extends State<SurecEkle> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Süreç Ekle/Düzenleee"),
+        title: Text("Süreç Ekle/Düzenle"),
       ),
       body: Center(
           child: Column(

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:is_takip_flutter/denemeDbProcess.dart';
-import 'package:is_takip_flutter/screens/surec_ekle.dart';
+import 'package:is_takip_flutter/screens/process_add.dart';
 
 class surecTest extends StatefulWidget {
   @override
@@ -76,7 +76,7 @@ class _surecTestState extends State<surecTest> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => SurecEkle()));
+                                  builder: (context) => ProcessAdd()));
                         } //_yazdir,
                         ),
                   );

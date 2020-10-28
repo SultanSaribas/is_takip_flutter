@@ -35,7 +35,7 @@ class _CustomerAddState extends State<CustomerAdd> {
 */
     return Scaffold(
         appBar: AppBar(
-          title: Text("Müşteri Ekleme Sayfası"),
+          title: Text("Müşteri Ekle"),
         ),
         body: Container(
           padding: EdgeInsets.all(20),

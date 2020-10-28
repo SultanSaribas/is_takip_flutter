@@ -5,12 +5,12 @@ import 'package:flutter/widgets.dart';
 
 import 'customer_add.dart';
 
-class SaticiGiris extends StatefulWidget {
+class CompanyCompleted extends StatefulWidget {
   @override
-  _SaticiGirisState createState() => _SaticiGirisState();
+  _CompanyCompletedState createState() => _CompanyCompletedState();
 }
 
-class _SaticiGirisState extends State<SaticiGiris> {
+class _CompanyCompletedState extends State<CompanyCompleted> {
   //bool isSwitched = false;
   var customerID = "12";
   int i = 0;
@@ -38,7 +38,7 @@ class _SaticiGirisState extends State<SaticiGiris> {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          "Satıcı Giriş Sayfası",
+          "Tamamlanan İşlemler",
         ),
       ),
       body: ListView.builder(

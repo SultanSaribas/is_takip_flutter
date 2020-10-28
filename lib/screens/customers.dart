@@ -11,10 +11,12 @@ class Customers extends StatefulWidget {
 
 class _CustomersState extends State<Customers> {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  Map<String, dynamic> dbEkle = Map();
+  Map<String, dynamic> customers = Map();
 
   @override
   Widget build(BuildContext context) {
+
+    Stream company = FirebaseFirestore.instance.collection('company').snapshots();
     var customerNames = [
       "Sultan",
       "Esra",
@@ -163,12 +165,6 @@ class _CustomersState extends State<Customers> {
                           child: IconButton(
                             color: Colors.white,
                             onPressed: () {
-                              dbEkle["name"] = "sultan";
-                              _firestore
-                                  .collection("users")
-                                  .doc()
-                                  .set(dbEkle)
-                                  .then((v) => debugPrint("data eklendi"));
                             },
                             icon: Icon(Icons.call),
                           ),
@@ -185,4 +181,8 @@ class _CustomersState extends State<Customers> {
       ),
     );
   }
+}
+
+void getFromFb() async{
+
 }
