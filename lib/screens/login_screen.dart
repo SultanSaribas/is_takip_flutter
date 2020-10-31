@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:is_takip_flutter/models/users.dart';
 import 'package:is_takip_flutter/screens/customer_add_test.dart';
-import 'package:is_takip_flutter/screens/esra_deneme_saticiG.dart';
+import 'package:is_takip_flutter/screens/satici_giris_test.dart';
 import 'package:is_takip_flutter/screens/panel.dart';
 import 'package:is_takip_flutter/screens/register_screen.dart';
-import 'package:is_takip_flutter/screens/satici_giris_test.dart';
 import 'package:is_takip_flutter/screens/testSayfasi.dart';
 import 'package:is_takip_flutter/screens/testSurecGoruntule.dart';
 import 'package:is_takip_flutter/validation/login_validation.dart';
@@ -99,6 +98,7 @@ class _LoginScreenState extends State<LoginScreen> with LoginValidationMixin {
                                 builder: (context) => CustomerAddTest()));
                       },
                     ),
+                    /*
                     FlatButton(
                       //color: Colors.blue,
                       child: Text(
@@ -112,6 +112,7 @@ class _LoginScreenState extends State<LoginScreen> with LoginValidationMixin {
                                 builder: (context) => DenemeEsra()));
                       },
                     ),
+                    */
                       Row(
                             //crossAxisAlignment: CrossAxisAlignment.baseline,
                             mainAxisAlignment: MainAxisAlignment.center,
