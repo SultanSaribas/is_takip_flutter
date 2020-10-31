@@ -109,7 +109,7 @@ class _LoginScreenState extends State<LoginScreen> with LoginValidationMixin {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => EkranOlustur()));
+                                builder: (context) => DenemeEsra()));
                       },
                     ),
                       Row(
