@@ -31,6 +31,7 @@ class _CustomerAddTestState extends State<CustomerAddTest> {
   ];
   String secilenSurec = "Paça Daraltma";
   bool checkBoxState = false;
+
   @override
   Widget build(BuildContext context) {
 /*
@@ -106,9 +107,11 @@ class _CustomerAddTestState extends State<CustomerAddTest> {
                     List<DropdownMenuItem> currencyItems = [];
                     for (int i = 0; i < snapshot.data.docs.length; i++) {
                       DocumentSnapshot snap = snapshot.data.docs[i];
+                    //debugPrint("-------------"+ snap.data()["processName"].toString());
                       currencyItems.add(DropdownMenuItem(
                         child: Text(
-                          snap.id, // BURADA ID DEĞİL DE O PROCESSİN ADINI ALMASI LAZIM AMA NASIL YAPACAM ANLAMADIM
+                          snap.data()["processName"],
+                          // BURADA ID DEĞİL DE O PROCESSİN ADINI ALMASI LAZIM AMA NASIL YAPACAM ANLAMADIM
                           style: TextStyle(color: Colors.blue),
                         ),
                         value:
