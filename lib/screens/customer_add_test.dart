@@ -14,6 +14,7 @@ class CustomerAddTest extends StatefulWidget {
 
 class _CustomerAddTestState extends State<CustomerAddTest> {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  var selectedCurrency;
   String customerID;
   String name = "";
   String phoneNumber = " ";
@@ -94,13 +95,61 @@ class _CustomerAddTestState extends State<CustomerAddTest> {
                   },
                 ),
               ),
+              StreamBuilder<QuerySnapshot>(
+                stream: _firestore
+                    .collection("/company/company_test_2/process")
+                    .snapshots(),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) {
+                    Text("Yükleniyor!");
+                  } else {
+                    List<DropdownMenuItem> currencyItems = [];
+                    for (int i = 0; i < snapshot.data.docs.length; i++) {
+                      DocumentSnapshot snap = snapshot.data.docs[i];
+                      currencyItems.add(DropdownMenuItem(
+                        child: Text(
+                          snap.id, // BURADA ID DEĞİL DE O PROCESSİN ADINI ALMASI LAZIM AMA NASIL YAPACAM ANLAMADIM
+                          style: TextStyle(color: Colors.blue),
+                        ),
+                        value:
+                            "${snap.id}", // AYNI ŞEYİ BURADA DA DÜZELTMEK LAZIM
+                      ));
+                    }
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        DropdownButton(
+                          items: currencyItems,
+                          onChanged: (currencyValue) {
+                            final snackbar = SnackBar(
+                                content: Text(
+                              "Seçilen Süreç $currencyValue",
+                              style: TextStyle(color: Colors.blueGrey),
+                            ));
+                            Scaffold.of(context).showSnackBar(snackbar);
+                            setState(() {
+                              selectedCurrency = currencyValue;
+                            });
+                          },
+                          value: selectedCurrency,
+                          isExpanded: false,
+                          hint: new Text(
+                            "Süreç Seçiniz",
+                            style: TextStyle(color: Colors.blue),
+                          ),
+                        )
+                      ],
+                    );
+                  }
+                },
+              ),
               Padding(
                 padding: const EdgeInsets.all(10),
                 //padding: const EdgeInsets.only(left: 3,right: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    Container(
+                    /* Container(
                         margin: EdgeInsets.only(left: 10),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
@@ -127,7 +176,8 @@ class _CustomerAddTestState extends State<CustomerAddTest> {
                               value: secilenSurec,
                             ),
                           ),
-                        )),
+                        )
+                        ),*/
                     RaisedButton(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30.0)),
@@ -194,12 +244,12 @@ class _CustomerAddTestState extends State<CustomerAddTest> {
         } else {
           temp = 0;
         }
-
       }
       if (temp == 1) {
-        tempID=_firestore.collection("/company/company_test_2/customers").doc().id;
-        mapCustomer["customersID"]=tempID;
-        serviceMap["customersID"]=tempID;
+        tempID =
+            _firestore.collection("/company/company_test_2/customers").doc().id;
+        mapCustomer["customersID"] = tempID;
+        serviceMap["customersID"] = tempID;
         _firestore
             .collection("/company/company_test_2/customers")
             .doc(tempID)
@@ -210,15 +260,15 @@ class _CustomerAddTestState extends State<CustomerAddTest> {
         for (int j = 0; j < querysnapshot.docs.length; j++) {
           if (mapCustomer["phoneNumber"] ==
               querysnapshot.docs[j].data()["phoneNumber"].toString()) {
-            tempID=querysnapshot.docs[j].id;
+            tempID = querysnapshot.docs[j].id;
             debugPrint("if ici tempID $tempID");
             serviceMap["customersID"] = tempID;
-            debugPrint("if ici map "+serviceMap["customersID"]);
+            debugPrint("if ici map " + serviceMap["customersID"]);
           }
         }
       }
-      debugPrint("if dısı map "+serviceMap["customersID"]);
-      debugPrint("if dısı map "+tempID);
+      debugPrint("if dısı map " + serviceMap["customersID"]);
+      debugPrint("if dısı map " + tempID);
 
       _firestore
           .collection("/company/company_test_2/services")
@@ -226,14 +276,13 @@ class _CustomerAddTestState extends State<CustomerAddTest> {
           .set(serviceMap)
           .then((v) => debugPrint("service data eklendi"));
     });
-
-
-
   }
+
   void _ekle() async {
     debugPrint("İKİNCİ FONKSİYON CALISTI");
-   String tempID=_firestore.collection("/company/company_test_2/customers").doc().id;
-    mapCustomer["customersID"]=tempID;
+    String tempID =
+        _firestore.collection("/company/company_test_2/customers").doc().id;
+    mapCustomer["customersID"] = tempID;
     _firestore
         .collection("/company/company_test_2/customers")
         .doc(tempID)
