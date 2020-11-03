@@ -123,8 +123,8 @@ class _CustomerAddTestState extends State<CustomerAddTest> {
                           onChanged: (currencyValue) {
                             final snackbar = SnackBar(
                                 content: Text(
-                              "Seçilen Süreç $currencyValue",
-                              style: TextStyle(color: Colors.blueGrey),
+                              "Seçilen süreç $currencyValue ",
+                              style: TextStyle(color: Colors.blue),
                             ));
                             Scaffold.of(context).showSnackBar(snackbar);
                             setState(() {
@@ -149,35 +149,6 @@ class _CustomerAddTestState extends State<CustomerAddTest> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    /* Container(
-                        margin: EdgeInsets.only(left: 10),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(
-                                color: Colors.lightBlue,
-                                style: BorderStyle.solid,
-                                width: 1.80)),
-                        child: DropdownButtonHideUnderline(
-                          child: Padding(
-                            padding: const EdgeInsets.all(5),
-                            child: DropdownButton<String>(
-                              items: surec.map((e) {
-                                return DropdownMenuItem<String>(
-                                  child: Text(e),
-                                  value: e,
-                                );
-                              }).toList(),
-                              onChanged: (s) {
-                                setState(() {
-                                  secilenSurec = s;
-                                  serviceMap['process'] = secilenSurec;
-                                });
-                              },
-                              value: secilenSurec,
-                            ),
-                          ),
-                        )
-                        ),*/
                     RaisedButton(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30.0)),

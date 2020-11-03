@@ -110,7 +110,6 @@ class _SurecEkleDbState extends State<SurecEkleDb> {
 
   void _ekle(String a) {
     debugPrint("floating Button basildi ekle calisti");
-
     setState(() {
       surecAdimlar.add(a);
       adimSayar++;
@@ -118,6 +117,7 @@ class _SurecEkleDbState extends State<SurecEkleDb> {
   }
 
   void _dbEkle() async {
+    
     int temp; //kontrol için
     eklenen["steps"] = steps;
     _firestore
@@ -127,10 +127,10 @@ class _SurecEkleDbState extends State<SurecEkleDb> {
       for (int i = 0; i < querysnapshot.docs.length; i++) {
         if (eklenen["processName"] !=
             querysnapshot.docs[i].data()["processName"].toString()) {
-          temp=1;
+          temp = 1;
+        } else {
+          temp = 0;
         }
-        else
-          {temp=0;}
       }
       if (temp == 1) {
         _firestore
@@ -138,6 +138,7 @@ class _SurecEkleDbState extends State<SurecEkleDb> {
             .doc()
             .set(eklenen)
             .then((v) => debugPrint("data eklendi"));
+        
       } else {
         debugPrint(" sürec ismi kullanılıyor ");
       }

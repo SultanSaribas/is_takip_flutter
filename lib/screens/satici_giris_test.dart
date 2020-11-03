@@ -24,9 +24,13 @@ class _SaticiGirisTestState extends State<SaticiGirisTest> {
     "Emre",
     "Burak",
   ];
+  //var customerNames = ["musteri"];
   var notes = [];
   String note;
+  String name;
+
   //Future<void>_siparisleriGetir() async {
+
   _siparisleriGetir() async {
     await _firestore
         .collection("/company/company_test_2/services")
@@ -42,10 +46,26 @@ class _SaticiGirisTestState extends State<SaticiGirisTest> {
     });
   }
 
+/*
+  Future<void>_customerGet() async{
+  //_customerGet() async {
+    await _firestore
+        .collection("/company/company_test_2/customers")
+        .get()
+        .then((querysnapshot1) {
+      debugPrint("customerdeki sayi" + querysnapshot1.docs.length.toString());
+      for (int i = 0; i < querysnapshot1.docs.length; i++) {
+        name = querysnapshot1.docs[i].data()["name"].toString();
+        customerNames.add(name);
+      }
+    });
+  }
+*/
   @override
   void initState() {
     super.initState();
     _siparisleriGetir();
+    //_customerGet();
   }
 
   @override
@@ -58,6 +78,7 @@ class _SaticiGirisTestState extends State<SaticiGirisTest> {
         ),
       ),
       body: FutureBuilder(
+          //future: _customerGet(),
           future: _siparisleriGetir(),
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
@@ -73,7 +94,7 @@ class _SaticiGirisTestState extends State<SaticiGirisTest> {
                 );
               case ConnectionState.done:
                 return ListView.builder(
-                  itemCount: notes.length,
+                  itemCount: customerNames.length,
                   itemBuilder: (context, position) {
                     return Column(children: <Widget>[
                       Container(
