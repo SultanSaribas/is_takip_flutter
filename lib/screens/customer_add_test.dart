@@ -23,12 +23,14 @@ class _CustomerAddTestState extends State<CustomerAddTest> {
   Map<String, dynamic> mapCustomer = Map();
   Map<String, dynamic> serviceMap = Map();
 
+  /*
   List<String> surec = [
     "Paça Daraltma",
     "Boy Kısaltma",
     "Elbise Dikimi",
     "Bel Daraltma"
   ];
+  */
   String secilenSurec = "Paça Daraltma";
   bool checkBoxState = false;
   @override

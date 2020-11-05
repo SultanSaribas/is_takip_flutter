@@ -117,10 +117,13 @@ class _SurecEkleDbState extends State<SurecEkleDb> {
   }
 
   void _dbEkle() async {
-    
+    String denemeID;
     int temp; //kontrol için
     eklenen["steps"] = steps;
-    _firestore
+    denemeID =
+        _firestore.collection("/company/company_test_2/process").doc().id;
+    eklenen["processID"] = denemeID;
+    await _firestore
         .collection("/company/company_test_2/process")
         .get()
         .then((querysnapshot) {
@@ -132,15 +135,30 @@ class _SurecEkleDbState extends State<SurecEkleDb> {
           temp = 0;
         }
       }
+
       if (temp == 1) {
         _firestore
             .collection("/company/company_test_2/process")
-            .doc()
+            .doc(denemeID)
             .set(eklenen)
-            .then((v) => debugPrint("data eklendi"));
-        
+            .then((v) => debugPrint("data eklendi " + denemeID));
       } else {
         debugPrint(" sürec ismi kullanılıyor ");
+        _firestore
+            .collection("/company/company_test_2/process")
+            .get()
+            .then((querysnapshot) {
+          for (int i = 0; i < querysnapshot.docs.length; i++) {
+            if (eklenen["processName"] ==
+                querysnapshot.docs[i].data()["processName"].toString()) {
+              debugPrint("qqqqqqqqqqq " + querysnapshot.docs[i].id);
+              querysnapshot.docs[i]
+                  .data()
+                  .update('steps', (value) => "jdsdaf");
+              //querysnapshot.docs[i].data().update('aaaa','ffjsfs' );
+            }
+          }
+        });
       }
     });
   }
