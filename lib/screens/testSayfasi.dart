@@ -118,6 +118,7 @@ class _SurecEkleDbState extends State<SurecEkleDb> {
 
   void _dbEkle() async {
     String denemeID;
+    String queryID;
     int temp; //kontrol için
     eklenen["steps"] = steps;
     denemeID =
@@ -151,11 +152,13 @@ class _SurecEkleDbState extends State<SurecEkleDb> {
           for (int i = 0; i < querysnapshot.docs.length; i++) {
             if (eklenen["processName"] ==
                 querysnapshot.docs[i].data()["processName"].toString()) {
-              debugPrint("qqqqqqqqqqq " + querysnapshot.docs[i].id);
-              querysnapshot.docs[i]
-                  .data()
-                  .update('steps', (value) => "jdsdaf");
-              //querysnapshot.docs[i].data().update('aaaa','ffjsfs' );
+              queryID = querysnapshot.docs[i].id;
+              debugPrint("process ID: " + queryID);
+              _firestore
+                  .collection("/company/company_test_2/process")
+                  .doc(queryID)
+                  .set({'steps': surecAdimlar}, SetOptions(merge: true));
+              // dizi olarak ekliyor düzenlenebilir?!
             }
           }
         });
