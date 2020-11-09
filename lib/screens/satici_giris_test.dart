@@ -29,9 +29,9 @@ class _SaticiGirisTestState extends State<SaticiGirisTest> {
   String note;
   String name;
 
-  //Future<void>_siparisleriGetir() async {
-
-  _siparisleriGetir() async {
+  Future<String> _processRead;
+  // ignore: missing_return
+  Future<String>_siparisleriGetir() async {
     await _firestore
         .collection("/company/company_test_2/services")
         .get()
@@ -64,7 +64,7 @@ class _SaticiGirisTestState extends State<SaticiGirisTest> {
   @override
   void initState() {
     super.initState();
-    _siparisleriGetir();
+    _processRead=_siparisleriGetir();
     //_customerGet();
   }
 
@@ -79,7 +79,7 @@ class _SaticiGirisTestState extends State<SaticiGirisTest> {
       ),
       body: FutureBuilder(
           //future: _customerGet(),
-          future: _siparisleriGetir(),
+          future: _processRead,
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.none:
@@ -196,7 +196,6 @@ class _SaticiGirisTestState extends State<SaticiGirisTest> {
           }),
     );
   }
-
   void _yazdir() {
     for (i = 0; i <= payment.length - 1; i++) {
       debugPrint(payment[i].toString());

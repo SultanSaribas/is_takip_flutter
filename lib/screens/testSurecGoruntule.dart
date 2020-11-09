@@ -15,12 +15,12 @@ class _surecTestState extends State<surecTest> {
   var surecler = [];
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   String processId = "process_test_";
-  Future<String> _myString;
+  Future<String> _readDoc;
 
   @override
   void initState() {
     super.initState();
-    _myString = _tumDocOku();
+    _readDoc = _tumDocOku();
     //_surecYenile();
     //_tumDocOku();
   }
@@ -32,7 +32,7 @@ class _surecTestState extends State<surecTest> {
         title: Text("test Süreçlerim"),
       ),
       body: FutureBuilder(
-          future: _myString,
+          future: _readDoc,
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.none:
