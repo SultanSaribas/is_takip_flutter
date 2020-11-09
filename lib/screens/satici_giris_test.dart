@@ -24,14 +24,14 @@ class _SaticiGirisTestState extends State<SaticiGirisTest> {
     "Emre",
     "Burak",
   ];
-  //var customerNames = ["musteri"];
+  //var customerNames = [];
   var notes = [];
   String note;
   String name;
 
   Future<String> _processRead;
   // ignore: missing_return
-  Future<String>_siparisleriGetir() async {
+  Future<String> _siparisleriGetir() async {
     await _firestore
         .collection("/company/company_test_2/services")
         .get()
@@ -45,10 +45,9 @@ class _SaticiGirisTestState extends State<SaticiGirisTest> {
       }
     });
   }
-
 /*
-  Future<void>_customerGet() async{
-  //_customerGet() async {
+  Future<String> _siparisleriGetir() async {
+    //_customerGet() async {
     await _firestore
         .collection("/company/company_test_2/customers")
         .get()
@@ -60,11 +59,12 @@ class _SaticiGirisTestState extends State<SaticiGirisTest> {
       }
     });
   }
-*/
+  */
+
   @override
   void initState() {
     super.initState();
-    _processRead=_siparisleriGetir();
+    _processRead = _siparisleriGetir();
     //_customerGet();
   }
 
@@ -196,6 +196,7 @@ class _SaticiGirisTestState extends State<SaticiGirisTest> {
           }),
     );
   }
+
   void _yazdir() {
     for (i = 0; i <= payment.length - 1; i++) {
       debugPrint(payment[i].toString());

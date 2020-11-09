@@ -116,7 +116,7 @@ class _SurecEkleDbState extends State<SurecEkleDb> {
     });
   }
 
-  void _dbEkle() async {
+  Future<void> _dbEkle() async {
     String denemeID;
     String queryID;
     int temp; //kontrol için

@@ -22,6 +22,7 @@ class _CustomerAddTestState extends State<CustomerAddTest> {
   var tutar;
   Map<String, dynamic> mapCustomer = Map();
   Map<String, dynamic> serviceMap = Map();
+  String processID;
 
   /*
   List<String> surec = [
@@ -114,7 +115,6 @@ class _CustomerAddTestState extends State<CustomerAddTest> {
                           style: TextStyle(color: Colors.blue),
                         ),
                         value: snap.data()["processName"],
-                        //"${snap.id}",
                       ));
                     }
                     return Row(
@@ -131,6 +131,8 @@ class _CustomerAddTestState extends State<CustomerAddTest> {
                             Scaffold.of(context).showSnackBar(snackbar);
                             setState(() {
                               selectedCurrency = currencyValue;
+                              mapCustomer["processName"] = selectedCurrency;
+                              serviceMap["process"] = selectedCurrency;
                             });
                           },
                           value: selectedCurrency,
