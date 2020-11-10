@@ -154,11 +154,6 @@ class _SurecEkleDbState extends State<SurecEkleDb> {
                 querysnapshot.docs[i].data()["processName"].toString()) {
               queryID = querysnapshot.docs[i].id;
               debugPrint("process ID: " + queryID);
-              /*_firestore
-                  .collection("/company/company_test_2/process")
-                  .doc(queryID)
-                  .set({'steps': surecAdimlar}, SetOptions(merge: true));*/
-              // dizi olarak ekliyor düzenlenebilir?!
               _firestore
                   .collection("/company/company_test_2/process")
                   .doc(queryID)
