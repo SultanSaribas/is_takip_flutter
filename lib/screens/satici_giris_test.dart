@@ -24,14 +24,10 @@ class _SaticiGirisTestState extends State<SaticiGirisTest> {
     "Emre",
     "Burak",
   ];
-  //var customerNames = [];
   var notes = [];
   String note;
-  String name;
-
-  Future<String> _processRead;
-  // ignore: missing_return
-  Future<String> _siparisleriGetir() async {
+  //Future<void>_siparisleriGetir() async {
+  _siparisleriGetir() async {
     await _firestore
         .collection("/company/company_test_2/services")
         .get()
@@ -45,27 +41,11 @@ class _SaticiGirisTestState extends State<SaticiGirisTest> {
       }
     });
   }
-/*
-  Future<String> _siparisleriGetir() async {
-    //_customerGet() async {
-    await _firestore
-        .collection("/company/company_test_2/customers")
-        .get()
-        .then((querysnapshot1) {
-      debugPrint("customerdeki sayi" + querysnapshot1.docs.length.toString());
-      for (int i = 0; i < querysnapshot1.docs.length; i++) {
-        name = querysnapshot1.docs[i].data()["name"].toString();
-        customerNames.add(name);
-      }
-    });
-  }
-  */
 
   @override
   void initState() {
     super.initState();
-    _processRead = _siparisleriGetir();
-    //_customerGet();
+    _siparisleriGetir();
   }
 
   @override
@@ -78,8 +58,7 @@ class _SaticiGirisTestState extends State<SaticiGirisTest> {
         ),
       ),
       body: FutureBuilder(
-          //future: _customerGet(),
-          future: _processRead,
+          future: _siparisleriGetir(),
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.none:
@@ -94,7 +73,7 @@ class _SaticiGirisTestState extends State<SaticiGirisTest> {
                 );
               case ConnectionState.done:
                 return ListView.builder(
-                  itemCount: customerNames.length,
+                  itemCount: notes.length,
                   itemBuilder: (context, position) {
                     return Column(children: <Widget>[
                       Container(
