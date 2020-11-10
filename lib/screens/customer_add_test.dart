@@ -19,6 +19,7 @@ class _CustomerAddTestState extends State<CustomerAddTest> {
   String name = "";
   String phoneNumber = " ";
   String note = " ";
+  String tempProcess;
   var tutar;
   Map<String, dynamic> mapCustomer = Map();
   Map<String, dynamic> serviceMap = Map();
@@ -114,7 +115,7 @@ class _CustomerAddTestState extends State<CustomerAddTest> {
                           snap.data()["processName"],
                           style: TextStyle(color: Colors.blue),
                         ),
-                        value: snap.data()["processName"],
+                        value: snap.data()["processID"],
                       ));
                     }
                     return Row(
@@ -131,8 +132,9 @@ class _CustomerAddTestState extends State<CustomerAddTest> {
                             Scaffold.of(context).showSnackBar(snackbar);
                             setState(() {
                               selectedCurrency = currencyValue;
-                              mapCustomer["processName"] = selectedCurrency;
-                              serviceMap["process"] = selectedCurrency;
+                              tempProcess = selectedCurrency;
+                              debugPrint(tempProcess);
+
                             });
                           },
                           value: selectedCurrency,
@@ -208,6 +210,8 @@ class _CustomerAddTestState extends State<CustomerAddTest> {
     int temp = 0;
     String tempID;
     String tempCustomerID; //kontrol için
+    serviceMap["processID"]=tempProcess;
+    debugPrint("eklenen process id :" +serviceMap["processID"]);
     _firestore
         .collection("/company/company_test_2/customers")
         .get()
