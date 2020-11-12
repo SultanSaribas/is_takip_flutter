@@ -17,15 +17,14 @@ class _SaticiGirisTestState extends State<SaticiGirisTest> {
   int i = 0;
   List<bool> payment = [false, false, false, false, false, false];
   var customerNames = [
-    "Sultan",
-    "Esra",
-    "Atakan",
-    "Eylül",
-    "Emre",
-    "Burak",
+
   ];
   var notes = [];
-  String note;
+  var customersID= [];
+  var tempCustomersName= [];
+
+  String tempCID;
+  int countServices;
   //Future<void>_siparisleriGetir() async {
   _siparisleriGetir() async {
     await _firestore
@@ -34,12 +33,33 @@ class _SaticiGirisTestState extends State<SaticiGirisTest> {
         .then((querysnapshot) {
       debugPrint("services koleksiyonundaki eleman sayisi:" +
           querysnapshot.docs.length.toString());
+      countServices= querysnapshot.docs.length;
       for (int i = 0; i < querysnapshot.docs.length; i++) {
-        note = querysnapshot.docs[i].data()["note"].toString();
-        notes.add(note);
+        tempCID = querysnapshot.docs[i].data()["customersID"].toString();
+        customersID.add(tempCID);
+        customerNames.add("deneme");
+        notes.add("test");
+
         //debugPrint(querysnapshot.docs[i].data()["name"].toString()); //tüm dataların sadece note verisini oku
       }
     });
+    await _firestore
+        .collection("/company/company_test_2/customers")
+        .get()
+        .then((querysnapshot) {
+      debugPrint("customers koleksiyonundaki eleman sayisi:" +
+          querysnapshot.docs.length.toString());
+      countServices= querysnapshot.docs.length;
+      for (int i = 0; i < countServices; i++) {
+        for (int j = 0; j < querysnapshot.docs.length; j++) {
+          if(querysnapshot.docs[j].data()["customersID"].toString()==tempCID){
+            tempCustomersName.add(querysnapshot.docs[j].data()["name"].toString());
+            debugPrint("iç içe "+tempCustomersName[j]);
+          }
+        }
+      }
+    });
+
   }
 
   @override
@@ -59,6 +79,7 @@ class _SaticiGirisTestState extends State<SaticiGirisTest> {
       ),
       body: FutureBuilder(
           future: _siparisleriGetir(),
+          // ignore: missing_return
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.none:
@@ -73,7 +94,7 @@ class _SaticiGirisTestState extends State<SaticiGirisTest> {
                 );
               case ConnectionState.done:
                 return ListView.builder(
-                  itemCount: notes.length,
+                  itemCount: customersID.length,
                   itemBuilder: (context, position) {
                     return Column(children: <Widget>[
                       Container(
@@ -88,7 +109,7 @@ class _SaticiGirisTestState extends State<SaticiGirisTest> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Divider(height: 46.0),
-                                    Text(customerNames[position]),
+                                    Text(tempCustomersName[position]),
                                   ]),
                               Column(children: <Widget>[
                                 Divider(height: 36.0),

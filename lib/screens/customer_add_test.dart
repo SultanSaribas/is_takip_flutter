@@ -103,6 +103,7 @@ class _CustomerAddTestState extends State<CustomerAddTest> {
                 stream: _firestore
                     .collection("/company/company_test_2/process")
                     .snapshots(),
+                // ignore: missing_return
                 builder: (context, snapshot) {
                   if (!snapshot.hasData) {
                     Text("Yükleniyor!");
@@ -207,6 +208,7 @@ class _CustomerAddTestState extends State<CustomerAddTest> {
   }
 
   void _dbEkle1() async {
+    serviceMap["currentStep"]=0;
     int temp = 0;
     String tempID;
     String tempCustomerID; //kontrol için
