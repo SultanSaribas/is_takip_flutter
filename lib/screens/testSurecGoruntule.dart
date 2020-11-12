@@ -45,6 +45,7 @@ class _surecTestState extends State<surecTest> {
       ),
       body: FutureBuilder(
           future: _readDoc,
+          // ignore: missing_return
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.none:

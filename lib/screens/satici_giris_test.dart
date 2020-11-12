@@ -15,58 +15,64 @@ class SaticiGirisTest extends StatefulWidget {
 class _SaticiGirisTestState extends State<SaticiGirisTest> {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   int i = 0;
-  List<bool> payment = [false, false, false, false, false, false];
-  var customerNames = [
-
-  ];
+  List<bool> payment = [];
   var notes = [];
-  var customersID= [];
-  var tempCustomersName= [];
+  var customerNames = [];
+  var tempCustomerID= [];
+  //var customerNames = [];
+  //var notes = [];
+  //var customersID= [];
+  //var tempCustomersName= [];
+
 
   String tempCID;
   int countServices;
   //Future<void>_siparisleriGetir() async {
   _siparisleriGetir() async {
+    String eklenecek;
     await _firestore
         .collection("/company/company_test_2/services")
         .get()
         .then((querysnapshot) {
       debugPrint("services koleksiyonundaki eleman sayisi:" +
           querysnapshot.docs.length.toString());
-      countServices= querysnapshot.docs.length;
+      countServices=querysnapshot.docs.length;
       for (int i = 0; i < querysnapshot.docs.length; i++) {
-        tempCID = querysnapshot.docs[i].data()["customersID"].toString();
-        customersID.add(tempCID);
-        customerNames.add("deneme");
-        notes.add("test");
-
-        //debugPrint(querysnapshot.docs[i].data()["name"].toString()); //tüm dataların sadece note verisini oku
+        eklenecek = querysnapshot.docs[i].data()["note"].toString();
+        notes.add(eklenecek);
+        payment.add(false);
+        customerNames.add("ahmet");
+        tempCustomerID.add(querysnapshot.docs[i].data()["customersID"].toString());
+        //debugPrint(querysnapshot.docs[i].data()["name"].toString()); //tüm dataların sadece name verisini oku
       }
     });
+    customerNames.clear();
     await _firestore
         .collection("/company/company_test_2/customers")
         .get()
         .then((querysnapshot) {
       debugPrint("customers koleksiyonundaki eleman sayisi:" +
           querysnapshot.docs.length.toString());
-      countServices= querysnapshot.docs.length;
-      for (int i = 0; i < countServices; i++) {
-        for (int j = 0; j < querysnapshot.docs.length; j++) {
-          if(querysnapshot.docs[j].data()["customersID"].toString()==tempCID){
-            tempCustomersName.add(querysnapshot.docs[j].data()["name"].toString());
-            debugPrint("iç içe "+tempCustomersName[j]);
+     
+      for(int j = 0; j < countServices; j++){
+        for (int k = 0; k < querysnapshot.docs.length; k++) {
+          if(tempCustomerID[j]==querysnapshot.docs[k].id){
+            eklenecek = querysnapshot.docs[k].data()["name"].toString();
+            customerNames.add(eklenecek);
           }
+
+
+          //debugPrint(querysnapshot.docs[i].data()["name"].toString()); //tüm dataların sadece name verisini oku
         }
       }
     });
-
   }
 
-  @override
-  void initState() {
-    super.initState();
-    _siparisleriGetir();
-  }
+  //@override
+ // void initState() {
+   // super.initState();
+   // _siparisleriGetir();
+  //}
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +100,7 @@ class _SaticiGirisTestState extends State<SaticiGirisTest> {
                 );
               case ConnectionState.done:
                 return ListView.builder(
-                  itemCount: customersID.length,
+                  itemCount: customerNames.length,
                   itemBuilder: (context, position) {
                     return Column(children: <Widget>[
                       Container(
@@ -109,7 +115,7 @@ class _SaticiGirisTestState extends State<SaticiGirisTest> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Divider(height: 46.0),
-                                    Text(tempCustomersName[position]),
+                                    Text(customerNames[position]),
                                   ]),
                               Column(children: <Widget>[
                                 Divider(height: 36.0),
